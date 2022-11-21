@@ -50,38 +50,38 @@ pd.options.display.max_rows = None # let me see all rows in the dataframe (can b
 # bool_matrix
 print(data.head())
 
-# bw = estimate_bandwidth(data)
-# print(bw)
-# analyzer = MeanShift(bandwidth=bw)
-# analyzer.fit(data)
-#
-# labels = analyzer.labels_
-# print(labels)
-# print('\n\n',np.unique(labels))
-#
-# cluster_centers = analyzer.cluster_centers_
-#
-# labels_unique = np.unique(labels)
-# n_clusters_ = len(labels_unique)
-#
-# print(cluster_centers)
-# print("number of estimated clusters : %d" % n_clusters_)
-#
-#
-# X, y = make_blobs(n_samples=1946, centers=cluster_centers, cluster_std=0.1)
-#
-# colors = cycle("bgrcmykbgrcmykbgrcmykbgrcmyk")
-# for k, col in zip(range(n_clusters_), colors):
-#     my_members = labels == k
-#     cluster_center = cluster_centers[k]
-#     plt.plot(X[my_members, 0], X[my_members, 1], col + ".")
-#     plt.plot(
-#         cluster_center[0],
-#         cluster_center[1],
-#         "o",
-#         markerfacecolor=col,
-#         markeredgecolor="k",
-#         markersize=10,
-#     )
-# plt.title("Estimated number of clusters: %d" % n_clusters_)
-# plt.show()
+bw = estimate_bandwidth(genre_dummies)
+print(bw)
+analyzer = MeanShift(bandwidth=bw)
+analyzer.fit(genre_dummies)
+
+labels = analyzer.labels_
+print(labels)
+print('\n\n',np.unique(labels))
+
+cluster_centers = analyzer.cluster_centers_
+
+labels_unique = np.unique(labels)
+n_clusters_ = len(labels_unique)
+
+print(cluster_centers)
+print("number of estimated clusters : %d" % n_clusters_)
+
+
+X, y = make_blobs(n_samples=1946, centers=10, cluster_std=0.1)
+
+colors = cycle("bgrcmykbgrcmykbgrcmykbgrcmyk")
+for k, col in zip(range(n_clusters_), colors):
+    my_members = labels == k
+    cluster_center = cluster_centers[k]
+    plt.plot(X[my_members, 0], X[my_members, 1], col + ".")
+    plt.plot(
+        cluster_center[0],
+        cluster_center[1],
+        "o",
+        markerfacecolor=col,
+        markeredgecolor="k",
+        markersize=10,
+    )
+plt.title("Estimated number of clusters: %d" % n_clusters_)
+plt.show()
