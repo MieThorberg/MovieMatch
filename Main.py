@@ -7,14 +7,35 @@ import matplotlib.pyplot as plt
 from itertools import cycle
 from sklearn.datasets import make_blobs
 
+
+pd.set_option('display.width', 600)
+pd.set_option('display.max_columns', 10)
 data = pd.read_csv("data/movies_metadata.csv")
 #id, genres
-data = data[['original_language']]
+#data = data[['original_language']]
 data = data.iloc[:2000]
-# data['genres'] = data['genres'].fillna('[]').apply(literal_eval).apply(lambda x: [i['name'] for i in x] if isinstance(x, list) else [])
+print(data.head())
+data['genre_names'] = data['genres'].fillna('[]').apply(literal_eval).apply(lambda x: [i['name'] for i in x] if isinstance(x, list) else [])
+print(data[['genres','genre_names']].head())
+genres_df = pd.DataFrame(data['genre_names'].tolist())
+print(genres_df.head())
 
+genres_df = data['genre_names'].apply(pd.Series)
+print(genres_df.head())
+
+stacked_genres = genres_df.stack()
+print(stacked_genres)
+
+#So, for each of the genres for each movie we now have a row. Here are the rows corresponding our first movie:
+print(stacked_genres[0])
 # One-hot encoding of 'Embarked' with pd.get_dummies
-data = pd.get_dummies(data,columns=['original_language'])
+dummies = pd.get_dummies(stacked_genres)
+print(dummies.head())
+
+# one row per movie
+genre_dummies = dummies.sum(level=0)
+print(genre_dummies.head())
+data = pd.concat([data, genre_dummies], axis=1)
 
 
 # Find missing values in the data and drop those rows:
@@ -25,17 +46,16 @@ missing = data[only_null_filter] # show all rows that has one or more null value
 
 # remove null value rows
 data = data.dropna()
-# print('rows after',len(data))
+print('rows after',len(data))
 # data
 pd.options.display.max_rows = None # let me see all rows in the dataframe (can be used with columns too)
 # bool_matrix
-
-
 print(data.head())
-bw = estimate_bandwidth(data)
+
+bw = estimate_bandwidth(genre_dummies)
 print(bw)
 analyzer = MeanShift(bandwidth=bw)
-analyzer.fit(data)
+analyzer.fit(genre_dummies)
 
 labels = analyzer.labels_
 print(labels)
@@ -50,7 +70,7 @@ print(cluster_centers)
 print("number of estimated clusters : %d" % n_clusters_)
 
 
-X, y = make_blobs(n_samples=2000, centers=cluster_centers, cluster_std=0.1)
+X, y = make_blobs(n_samples=1946, centers=10, cluster_std=0.5)
 
 colors = cycle("bgrcmykbgrcmykbgrcmykbgrcmyk")
 for k, col in zip(range(n_clusters_), colors):
