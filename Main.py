@@ -6,6 +6,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from itertools import cycle
 from sklearn.datasets import make_blobs
+
+
 pd.set_option('display.width', 600)
 pd.set_option('display.max_columns', 10)
 data = pd.read_csv("data/movies_metadata.csv")
@@ -68,7 +70,7 @@ print(cluster_centers)
 print("number of estimated clusters : %d" % n_clusters_)
 
 
-X, y = make_blobs(n_samples=1946, centers=10, cluster_std=0.1)
+X, y = make_blobs(n_samples=1946, centers=10, cluster_std=0.5)
 
 colors = cycle("bgrcmykbgrcmykbgrcmykbgrcmyk")
 for k, col in zip(range(n_clusters_), colors):
