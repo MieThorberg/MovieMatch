@@ -21,13 +21,13 @@ genres_df = pd.DataFrame(data['genre_names'].tolist())
 print(genres_df.head())
 
 genres_df = data['genre_names'].apply(pd.Series)
-print(genres_df.head())
+print("yo",genres_df.head())
 
 stacked_genres = genres_df.stack()
-print(stacked_genres)
+print("stacked",stacked_genres)
 
 #So, for each of the genres for each movie we now have a row. Here are the rows corresponding our first movie:
-print(stacked_genres[0])
+print("one row",stacked_genres[0])
 # One-hot encoding of 'Embarked' with pd.get_dummies
 dummies = pd.get_dummies(stacked_genres)
 print(dummies.head())
@@ -35,7 +35,7 @@ print(dummies.head())
 # one row per movie
 genre_dummies = dummies.sum(level=0)
 print(genre_dummies.head())
-data = pd.concat([data, genre_dummies], axis=1)
+data = pd.concat([data["vote_average"], genre_dummies], axis=1)
 
 
 # Find missing values in the data and drop those rows:
