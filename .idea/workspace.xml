@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="85c9f41a-04f0-4109-8dbd-f4f7163c5c31" name="Changes" comment="python install">
-      <change afterPath="$PROJECT_DIR$/PrepareData.ipynb" afterDir="false" />
+    <list default="true" id="85c9f41a-04f0-4109-8dbd-f4f7163c5c31" name="Changes" comment="added PrepareData.ipynb">
+      <change afterPath="$PROJECT_DIR$/Webscrape.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +73,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669118770086</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added PrepareData.ipynb">
+      <created>1669120736650</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1669120736650</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -91,7 +99,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="python install" />
-    <option name="LAST_COMMIT_MESSAGE" value="python install" />
+    <MESSAGE value="added PrepareData.ipynb" />
+    <option name="LAST_COMMIT_MESSAGE" value="added PrepareData.ipynb" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MovieMatch$Main.coverage" NAME="Main Coverage Results" MODIFIED="1669031386856" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
