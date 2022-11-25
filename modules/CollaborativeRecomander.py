@@ -4,13 +4,13 @@ from sklearn.neighbors import NearestNeighbors
 
 
 def load_rating():
-    rating_df = pd.read_csv('../../data/ratings_small.csv', usecols=['userId', 'movieId', 'rating'],
+    rating_df = pd.read_csv('data/ratings_small.csv', usecols=['userId', 'movieId', 'rating'],
                             dtype={'userId': 'int32', 'movieId': 'int32', 'rating': 'float32'})
     return rating_df
 
 
 def load_movies():
-    movies_df = pd.read_csv('./../../data/movies_metadata.csv', usecols=['id', 'title'])
+    movies_df = pd.read_csv('data/movies_metadata.csv', usecols=['id', 'title'])
     return movies_df
 
 
@@ -60,7 +60,7 @@ def get_popular_movies(rating_with_total_rating_count):
 def prepare_data():
     rating_df = load_rating()
     movies_df = prepare_movie_data(load_movies())
-    df = prepare_movie_data(merge_movie_and_rating(rating_df, movies_df))
+    df = prepare_df_data(merge_movie_and_rating(rating_df, movies_df))
     return df
 
 

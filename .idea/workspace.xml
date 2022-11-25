@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1cd7a14e-44d8-4904-9b9c-9f62fcd84e6e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Main.ipynb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/modules/recomander/CollaborativeRecomander.py" afterDir="false" />
+    <list default="true" id="1cd7a14e-44d8-4904-9b9c-9f62fcd84e6e" name="Changes" comment="added recomander module">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CollaborativeRecomander.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/CollaborativeRecomander.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieRevenueVSBudget.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/MovieRevenueVSBudget.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Main.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/recomander/CollaborativeRecomander.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/CollaborativeRecomander.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +54,11 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\miemt\Desktop\MovieMatch" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\miemt\Desktop\MovieMatch" />
+      <recent name="C:\Users\miemt\Desktop\MovieMatch\modules" />
+      <recent name="C:\Users\miemt\Desktop\MovieMatch\recomander" />
     </key>
   </component>
   <component name="RunManager">
@@ -120,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669120736650</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added recomander module">
+      <created>1669370862943</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1669370862943</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,7 +150,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="python install" />
     <MESSAGE value="added PrepareData.ipynb" />
-    <option name="LAST_COMMIT_MESSAGE" value="added PrepareData.ipynb" />
+    <MESSAGE value="added recomander module" />
+    <option name="LAST_COMMIT_MESSAGE" value="added recomander module" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MovieMatch$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1669366892052" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
