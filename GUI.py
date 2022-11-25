@@ -1,15 +1,11 @@
+import io
 import urllib.request
 from tkinter import *
 from tkinter.ttk import Combobox
+import modules.PrepareData as prepare
+import modules.recomender.CollaborativeRecomander as cr
 
-import seaborn as sns
-import pandas as pd
 from PIL import ImageTk, Image
-from matplotlib import pyplot as plt
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
-                                               NavigationToolbar2Tk)
-from ast import literal_eval
 
 # colors
 # TODO: make to a list of colors
@@ -111,8 +107,7 @@ class HomePage(Frame):
 
         self.frames = {}
         for F in (CollaborativePage, ContentPage):
-            frame = F(content)
-
+            frame = F(content, self)
             self.frames[F] = frame
         self.show_frame(CollaborativePage)
 
@@ -123,18 +118,21 @@ class HomePage(Frame):
 
 
 class CollaborativePage(Frame):
-    def __init__(self, parent):
+    def __init__(self, parent, controller):
         Frame.__init__(self, parent)
         self.rowconfigure(0, weight=1)
         self.columnconfigure(0, minsize=375)
         self.columnconfigure(1, weight=1)
         self.grid(row=0, column=0, sticky="WENS")
         left_content = LeftContent(self, "Collaborative Filtering", "We will recommend some movies by one movie you like")
-        CollaborativeFilter(left_content)
-        RightContent(self)
+        collaborative_filter = CollaborativeFilter(left_content)
+
+        RightContent(self, controller, collaborative_filter.get_movie_title())
 
 
 class CollaborativeFilter(Frame):
+    movie_title = ""
+
     def __init__(self, parent):
         Frame.__init__(self, parent, padx=15, pady=20, bg=c5)
         self.columnconfigure(0, weight=1)
@@ -143,13 +141,8 @@ class CollaborativeFilter(Frame):
         option_title = Label(self, text="Choose a movie you like:", font="Arial 10 bold", bg=c5, fg=c9)
         option_title.grid(row=0, column=0, sticky="NWSW")
 
-        # TODO: CHANGE TO REAL MOVIE TITLES
-        movies = [
-            "RANDOM1",
-            "RANDOM2",
-            "RANDOM3",
-            "RANDOM4"
-        ]
+        movies = prepare.get_all_movie_titles()
+
         movie_options = Combobox(self, state="readonly", values=movies)
         movie_options.set("Movies")
         movie_options.grid(row=1, column=0, sticky="WENS")
@@ -158,12 +151,17 @@ class CollaborativeFilter(Frame):
         frame.rowconfigure(0, weight=1)
         frame.grid(row=2, column=0, sticky="WENS")
 
-        button = Button(self, text="RUN", border=0, bg=c1, fg=c9)
+        button = Button(self, text="RUN", border=0, bg=c1, fg=c9, command=lambda: self.set_value(movie_options.get()))
         button.grid(row=3, column=0, sticky="WENS")
 
+    def set_value(self, movie_title):
+        self.movie_title = movie_title
+
+    def get_movie_title(self):
+        return self.movie_title
 
 class ContentPage(Frame):
-    def __init__(self, parent):
+    def __init__(self, parent, controller):
         Frame.__init__(self, parent)
         self.rowconfigure(0, weight=1)
         self.columnconfigure(0, minsize=375)
@@ -172,7 +170,7 @@ class ContentPage(Frame):
         left_content = LeftContent(self, "Content Filtering",
                                        "We will recommend some movies by your filtering choices")
         # CollaborativeFilter(left_content)
-        RightContent(self)
+        # RightContent(self)
 
 
 class LeftContent(Frame):
@@ -185,16 +183,20 @@ class LeftContent(Frame):
 
 
 class RightContent(Frame):
-    def __init__(self, parent):
+    def __init__(self, parent, controller, filter):
         Frame.__init__(self, parent, bg=c7)
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
         self.grid(row=0, column=1, sticky="WENS")
 
         # TODO: make a if statement to check if user has started system
+        # if filter != "":
+        #     recomends = cr.recommend_movies(prepare.get_id_by_title(filter), 5)
+
+        RecommendationList(self)
+        # else:<
         # default_label = Label(self, text="Nothing is registered.", bg=c7)
         # default_label.grid(row=0, column=0, sticky="WENS")
-        RecommendationList(self)
 
 
 class PageTitleContainer(Frame):
@@ -208,7 +210,7 @@ class PageTitleContainer(Frame):
 
 
 class MovieDetails(Frame):
-    def __init__(self, parent):
+    def __init__(self, parent, movie_title):
         Frame.__init__(self, parent, padx=25, pady=25, bg=c7, border=0)
         self.columnconfigure(0, weight=1)
         self.grid(row=0, column=0, sticky="WENS")
@@ -226,14 +228,15 @@ class MovieDetails(Frame):
 
         # TODO: select the right title, poster, short and long summary, link to trailer ..
         poster_url = "https://m.media-amazon.com/images/M/MV5BNjA3NGExZDktNDlhZC00NjYyLTgwNmUtZWUzMDYwMTZjZWUyXkEyXkFqcGdeQXVyMTU1MDM3NDk0._V1_QL75_UX190_CR0,0,190,281_.jpg"
-        urllib.request.urlretrieve(poster_url, "1.png")
-        img = Image.open("1.png")
+        # urllib.request.urlretrieve(poster_url, "1.png")
+        poster_url = urllib.request.urlopen(poster_url).read()
+        img = Image.open(io.BytesIO(poster_url))
         image = ImageTk.PhotoImage(img)
         label1 = Label(left, image=image, bg=c9, width=180)
         label1.image=image
         label1.grid(row=0, column=0, sticky="WENS")
 
-        title = Label(right, text="TITLE HERE", font="Arial 20 bold", fg=c1, bg=c9)
+        title = Label(right, text=movie_title, font="Arial 20 bold", fg=c1, bg=c9)
         title.grid(row=0, column=0, sticky="NWSW")
 
         genres = Label(right, text="Action, Fantasy, Sci-fi", bg=c9, fg=c10)
@@ -287,8 +290,8 @@ class RecommendationList(Frame):
 
 
         # TODO: change to the correct list
-        for i in range(12):
-            movie_details = MovieDetails(self)
+        for i in range(2):
+            movie_details = MovieDetails(self, i)
             movie_details.grid(row=i, column=0, sticky="WENS")
 
 
