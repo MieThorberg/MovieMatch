@@ -20,7 +20,7 @@ def __prepare_data(data,col1,col2):
 
 def __data_scaler(df):
     scaler = StandardScaler()
-    df[["{df.columns[1]}_t",'${df.columns[2]}_t']] = scaler.fit_transform(df[[df.columns[1],df.columns[2]]])
+    df[[(f"{df.columns[1]}_t"),(f'{df.columns[2]}_t')]] = scaler.fit_transform(df[[df.columns[1],df.columns[2]]])
     return df
 
 def __optimise_k_means(data, max_k):

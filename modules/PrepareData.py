@@ -5,7 +5,7 @@ from ast import literal_eval
 
 def prepare_movie_data():
     data = pd.read_csv("data/movies_metadata.csv")
-    data = data[data['original_language']=='en']
+    # data = data[data['original_language']=='en']
     data = data[['budget', 'genres','id', 'imdb_id','title', 'popularity', 'release_date', 'revenue', 'runtime', 'vote_average', 'vote_count']]
     data = data[(data['genres'] != "[]")]
     data['genres'] = data['genres'].fillna('[]').apply(literal_eval).apply(lambda x: [i['name'] for i in x] if isinstance(x, list) else [])
