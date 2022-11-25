@@ -1,6 +1,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn import preprocessing
+import plotly.express as px
+from plotly.offline import init_notebook_mode, iplot, plot
+init_notebook_mode(connected=True)
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
@@ -18,7 +20,7 @@ def __prepare_data(data,col1,col2):
 
 def __data_scaler(df):
     scaler = StandardScaler()
-    df[["{df.columns[1]}_t","{df.columns[2]}_t"]] = scaler.fit_transform(df[[df.columns[1],df.columns[2]]])
+    df[["{df.columns[1]}_t",'${df.columns[2]}_t']] = scaler.fit_transform(df[[df.columns[1],df.columns[2]]])
     return df
 
 def __optimise_k_means(data, max_k):
@@ -46,11 +48,14 @@ def __create_cluster(clusters,df):
     return df
 
 def __create_scatter(df):
-    fig = plt.scatter(x=df[df.columns[3]],y=df[df.columns[4]],c=df["clusters"])
-    plt.xlabel(df.columns[1])
-    plt.ylabel(df.columns[2])
-    plt.legend(*fig.legend_elements(), title='clusters')
-    plt.show()
+    df["clusters"] = df["clusters"].astype(pd.StringDtype())
+    fig = px.scatter(df, x=df.columns[1],y=df.columns[2],color='clusters',hover_data=['title'])
+    # fig = plt.scatter(x=df[df.columns[3]],y=df[df.columns[4]],c=df["clusters"])
+    # plt.xlabel(df.columns[1])
+    # plt.ylabel(df.columns[2])
+    # plt.legend(*fig.legend_elements(), title='clusters')
+    # plt.show()
+    iplot(fig)
 
 
 def create_cluster_scatter(col1="vote_average",col2="revenue",clusters=3):
