@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1cd7a14e-44d8-4904-9b9c-9f62fcd84e6e" name="Changes" comment="add heat map plus genre bar plot">
+    <list default="true" id="1cd7a14e-44d8-4904-9b9c-9f62fcd84e6e" name="Changes" comment="tilføjet analyse spørgsmål til readme">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CollaborativeRecomander.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/CollaborativeRecomander.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUI.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Main.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MovieRevenueVSBudget.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/MovieRevenueVSBudget.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webscraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/Webscraper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clusterCollection.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/clusterCollection.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/PrepareData.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/PrepareData.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,12 +52,13 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/miemt/Desktop/MovieMatch&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/miemt/Desktop/MovieMatch/images&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.editor&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\miemt\Desktop\MovieMatch\images" />
       <recent name="C:\Users\miemt\Desktop\MovieMatch" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -112,6 +116,11 @@
       <workItem from="1669110675208" duration="2224000" />
       <workItem from="1669276095136" duration="2231000" />
       <workItem from="1669358035740" duration="2113000" />
+      <workItem from="1669412694586" duration="7097000" />
+      <workItem from="1669507469513" duration="5010000" />
+      <workItem from="1669512685860" duration="18074000" />
+      <workItem from="1669576231835" duration="16376000" />
+      <workItem from="1669620242243" duration="1246000" />
     </task>
     <task id="LOCAL-00001" summary="python install">
       <created>1669118770086</created>
@@ -155,7 +164,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669383161730</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="tilføjet analyse spørgsmål til readme">
+      <created>1669387931019</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1669387931019</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,10 +195,11 @@
     <MESSAGE value="fix bug" />
     <MESSAGE value="refactor" />
     <MESSAGE value="add heat map plus genre bar plot" />
-    <option name="LAST_COMMIT_MESSAGE" value="add heat map plus genre bar plot" />
+    <MESSAGE value="tilføjet analyse spørgsmål til readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="tilføjet analyse spørgsmål til readme" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MovieMatch$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1669385196447" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MovieMatch$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1669620269476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MovieMatch$Main.coverage" NAME="Main Coverage Results" MODIFIED="1669031386856" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
