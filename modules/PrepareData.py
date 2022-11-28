@@ -15,11 +15,13 @@ def prepare_movie_data():
 
 
 def get_all_movie_titles():
-    # df = prepare_movie_data()
-
-    df = cr.prepare_data()
-    titles = df['title'].tolist()
-    return titles
+    data = cr.prepare_data()
+    movie_features_df = data.pivot_table(index='title')
+    size = movie_features_df.shape[0]
+    movies = []
+    for i in range(0, size):
+        movies.append(movie_features_df.index[i])
+    return movies
 
 
 def get_id_by_title(title):
