@@ -1,298 +1,380 @@
 import io
 import urllib.request
+import webbrowser
 from tkinter import *
 from tkinter.ttk import Combobox
 import modules.PrepareData as prepare
-import modules.recomender.CollaborativeRecomander as cr
-
+import modules.recomander.CollaborativeRecomander as cr
 from PIL import ImageTk, Image
+import Webscraper as ws
+import platform
 
-# colors
-# TODO: make to a list of colors
-c1 = "#000000"
-c2 = "#0A111F"
-c3 = "#14213D"
-c4 = "#127FFC"
-c5 = "#2F90FF"
-c6 = "#8DBDF4"
-c7 = "#D3E1F1"
-c8 = "#E1E2E3"
-c9 = "#FFFFFF"
-c10 = "#808080"
+colors = [
+    "#FFFFFF",  # white
+    "#F7F7F7",  # white/grey
+    "#404040",  # light grey
+    "#1A1A1A",  # grey
+    "#202020",  # dark grey
+    "#000000",  # black
+    "#FFD100"  # yellow
+]
 
 
 class Window(Tk):
     def __init__(self, width, height):
+        # initialize the window view
         Tk.__init__(self)
         self.title("MovieMatch")
+        # placing window at the center of your screen
         self.set_location(width, height)
         self.set_icon()
-        HomePage(self)
+        # layout of the window
+        Main(self)
 
     def set_location(self, width, height):
+        # get the width and height of screen
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
+        # calculate the x and y coordinates for placing window at center of the screen
         x_coordinate = int((screen_width / 2) - (width / 2))
         y_coordinate = int((screen_height / 2) - (height / 2))
+        # setting the window width, height at place it by the x and y coordinate
         self.geometry("{}x{}+{}+{}".format(width, height, x_coordinate, y_coordinate))
 
     def set_icon(self):
-        icon_image = PhotoImage(file='')
-        # self.iconphoto(False, icon_image)
+        icon_image = PhotoImage(file="images/icon.png")
+        self.iconphoto(False, icon_image)
 
 
-class StartPage(Frame):
-    def __init__(self, parent_frame):
-        Frame.__init__(self, parent_frame)
+class NavigationButton(Button):
+    def __init__(self, parent, controller, frame, text, column):
+        super().__init__(text=text)
+        button = Button(parent, text=text, bg=colors[0], width=30, border=0
+                        , command=lambda: controller.show_frame(frame),
+                        )
+        button.rowconfigure(0, weight=1)
+        button.columnconfigure(0, weight=1)
+        button.grid(row=0, column=column, sticky="WENS")
 
 
-class HomePage(Frame):
+class NavigationBar(Frame):
+    def __init__(self, parent, controller):
+        Frame.__init__(self, parent)
+        navigation_bar = Frame(parent, bg=colors[0])
+        navigation_bar.rowconfigure(0, weight=1)
+        navigation_bar.columnconfigure(0, weight=1)
+        navigation_bar.grid(row=0, column=0, sticky="NESE")
+        # adding buttons to the navigation bar
+        NavigationButton(navigation_bar, controller, CollaborativePage, "Collaborative", 0)
+        NavigationButton(navigation_bar, controller, ContentPage, "Content", 1)
+
+
+class Main(Frame):
     def __init__(self, parent):
         Frame.__init__(self, parent)
+        # MAIN
         main = Frame(parent)
         main.columnconfigure(0, weight=1)
         main.rowconfigure(1, weight=1)
         main.pack(expand=1, fill=BOTH)
 
-        top = Frame(main, height=50)
+        # TOP - contains the navigation bar
+        top = Frame(main, height=50, bg=colors[0])
         top.rowconfigure(0, weight=1)
         top.columnconfigure(0, weight=1)
         top.grid(row=0, column=0, sticky='WENS')
         top.grid_propagate(False)
-        nav = Frame(top, bg=c9)
-        nav.rowconfigure(0, weight=1)
-        nav.columnconfigure(0, minsize=375)
-        nav.columnconfigure(1, weight=1)
-        nav.grid(row=0, column=0, sticky="WENS")
+        # adding a navigation bar to the top frame
+        NavigationBar(top, self)
 
-        nav_left = Frame(nav, width=100, bg=c9)
-        nav_left.rowconfigure(0, weight=1)
-        nav_left.columnconfigure(0, weight=1)
-        nav_left.grid(row=0, column=0, sticky="WENS")
-
-        nav_right = Frame(nav, padx=20, bg=c9)
-        nav_right.rowconfigure(0, weight=1)
-        nav_right.columnconfigure(0, weight=1)
-        nav_right.grid(row=0, column=1, sticky="NESE")
-
-        # label = Label(nav_left, text="MovieMatch")
-        # label.grid(row=0, column=0)
-
-        # button1 = Button(nav_right, text="Analysis",
-        #                      width=20,
-        #                      bg=c8,
-        #                      border=0,
-        #                      highlightthickness=2,
-        #                      highlightbackground="red",
-        #                      highlightcolor="red",
-        #                  command=lambda: self.show_frame(AnalysisPage),)
-        # button1.rowconfigure(0, weight=1)
-        # button1.columnconfigure(0, weight=1)
-        # button1.grid(row=0, column=0, sticky="WENS")
-
-        button2 = Button(nav_right, text="Collaborative", bg=c9, width=30, border=0, command=lambda: self.show_frame(CollaborativePage),)
-        button2.rowconfigure(0, weight=1)
-        button2.columnconfigure(0, weight=1)
-        button2.grid(row=0, column=1, sticky="WENS")
-
-        button3 = Button(nav_right, text="Content", bg=c9, width=30, border=0, command=lambda: self.show_frame(ContentPage), )
-        button3.rowconfigure(0, weight=1)
-        button3.columnconfigure(0, weight=1)
-        button3.grid(row=0, column=2, sticky="WENS")
-
+        # BOTTOM CONTENT - contains the pages
         content = Frame(main)
         content.grid(row=1, column=0, sticky='WENS')
         content.columnconfigure(0, weight=1)
         content.rowconfigure(0, weight=1)
 
+        # save all pages in a list
         self.frames = {}
         for F in (CollaborativePage, ContentPage):
-            frame = F(content, self)
+            frame = F(content)
             self.frames[F] = frame
+
+        # first page to show on content frame
         self.show_frame(CollaborativePage)
 
     def show_frame(self, f):
+        # gets the specific frame from the list of frames
         frame = self.frames[f]
         frame.grid(row=0, column=0)
+        # raise frame to be first on top, so it will be visible on window
         frame.tkraise()
 
 
+class NothingRegisteredFrame(Frame):
+    def __init__(self, parent):
+        Frame.__init__(self, parent)
+        self.pack(fill=BOTH, expand=True)
+        label = Label(self, text="Nothing is registered.", fg=colors[0], bg=colors[2])
+        label.pack(fill=BOTH, expand=True)
+
+
 class CollaborativePage(Frame):
-    def __init__(self, parent, controller):
+    def __init__(self, parent):
         Frame.__init__(self, parent)
         self.rowconfigure(0, weight=1)
         self.columnconfigure(0, minsize=375)
         self.columnconfigure(1, weight=1)
         self.grid(row=0, column=0, sticky="WENS")
-        left_content = LeftContent(self, "Collaborative Filtering", "We will recommend some movies by one movie you like")
-        collaborative_filter = CollaborativeFilter(left_content)
 
-        RightContent(self, controller, collaborative_filter.get_movie_title())
+        LeftContent(self, "Collaborative Filtering",
+                    "We will recommend some movies by one movie you like", CollaborativeFilter)
+        self.right_content = RightContent(self)
+
+    def reload_right_content(self, recommendations):
+        if len(recommendations) != 0:
+            scroll_frame = ScrollableFrame(self.right_content, RecommendationList, recommendations)
+            self.right_content.show_frame(scroll_frame)
+        else:
+            nothing_registered_frame = NothingRegisteredFrame(self.right_content)
+            self.right_content.show_frame(nothing_registered_frame)
 
 
 class CollaborativeFilter(Frame):
-    movie_title = ""
+    all_movies = prepare.get_all_movie_titles()
+    recommendations = []
 
-    def __init__(self, parent):
-        Frame.__init__(self, parent, padx=15, pady=20, bg=c5)
+    def __init__(self, parent, controller):
+        self.controller = controller
+        Frame.__init__(self, parent, padx=15, pady=20, bg=colors[4])
         self.columnconfigure(0, weight=1)
         self.grid(row=1, column=0, sticky="WENS")
 
-        option_title = Label(self, text="Choose a movie you like:", font="Arial 10 bold", bg=c5, fg=c9)
+        option_title = Label(self, text="Choose a movie you like:", font="Arial 10 bold", bg=colors[4], fg=colors[0])
         option_title.grid(row=0, column=0, sticky="NWSW")
 
-        movies = prepare.get_all_movie_titles()
+        self.movie_options = Combobox(self, state="readonly", values=self.all_movies)
+        self.movie_options.set("Movies")
+        self.movie_options.grid(row=1, column=0, sticky="WENS")
 
-        movie_options = Combobox(self, state="readonly", values=movies)
-        movie_options.set("Movies")
-        movie_options.grid(row=1, column=0, sticky="WENS")
-
-        frame = Frame(self, height=15, bg=c5)
+        frame = Frame(self, height=15, bg=colors[4])
         frame.rowconfigure(0, weight=1)
         frame.grid(row=2, column=0, sticky="WENS")
 
-        button = Button(self, text="RUN", border=0, bg=c1, fg=c9, command=lambda: self.set_value(movie_options.get()))
+        button = Button(self, text="RUN", border=0, bg=colors[6], fg=colors[5],
+                        command=lambda: self.runCollaborativeFilter()
+                        )
         button.grid(row=3, column=0, sticky="WENS")
 
-    def set_value(self, movie_title):
-        self.movie_title = movie_title
+    def runCollaborativeFilter(self):
+        # TODO: get the real index for movie
+        self.recommendations = cr.recommend_movies(2, 6)
+        self.controller.reload_right_content(self.recommendations)
 
-    def get_movie_title(self):
-        return self.movie_title
 
 class ContentPage(Frame):
-    def __init__(self, parent, controller):
-        Frame.__init__(self, parent)
+    def __init__(self, parent):
+        Frame.__init__(self, parent, bg="blue")
         self.rowconfigure(0, weight=1)
         self.columnconfigure(0, minsize=375)
         self.columnconfigure(1, weight=1)
         self.grid(row=0, column=0, sticky="WENS")
-        left_content = LeftContent(self, "Content Filtering",
-                                       "We will recommend some movies by your filtering choices")
+        # left_content = LeftContent(self, "Content Filtering",
+        #                            "We will recommend some movies by your filtering choices")
         # CollaborativeFilter(left_content)
         # RightContent(self)
 
 
 class LeftContent(Frame):
-    def __init__(self, parent, title, description):
-        Frame.__init__(self, parent, width=375, bg=c5)
+    def __init__(self, parent, title, description, filter_frame):
+        Frame.__init__(self, parent, width=375, bg=colors[4])
         self.columnconfigure(0, weight=1)
         self.grid(row=0, column=0, sticky="WENS")
+
+        # TOP - showing the title and small description
         page_title_container = PageTitleContainer(self, title, description)
         page_title_container.grid(row=0, column=0, sticky="WENS")
 
+        # FILTER - show either CollaborativeFilter or ContentFilter
+        filter_frame(self, parent)
+
 
 class RightContent(Frame):
-    def __init__(self, parent, controller, filter):
-        Frame.__init__(self, parent, bg=c7)
+    def __init__(self, parent):
+        Frame.__init__(self, parent, bg=colors[2], highlightthickness=0)
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
         self.grid(row=0, column=1, sticky="WENS")
+        # The default frame to view the first time the content are shown
+        self.frame = NothingRegisteredFrame(self)
 
-        # TODO: make a if statement to check if user has started system
-        # if filter != "":
-        #     recomends = cr.recommend_movies(prepare.get_id_by_title(filter), 5)
-
-        RecommendationList(self)
-        # else:<
-        # default_label = Label(self, text="Nothing is registered.", bg=c7)
-        # default_label.grid(row=0, column=0, sticky="WENS")
+    def show_frame(self, new_frame):
+        self.frame.pack_forget()
+        self.frame = new_frame
+        self.frame.tkraise()
 
 
 class PageTitleContainer(Frame):
     def __init__(self, parent, title, description):
         Frame.__init__(self, parent)
-        self.configure(bg=c4, height=120, pady=25, padx=15)
-        title_ = Label(self, text=title, font="Arial 16 bold", bg=c4, fg=c9)
+        self.configure(bg=colors[3], height=120, pady=25, padx=15)
+        title_ = Label(self, text=title, font="Arial 16 bold", bg=colors[3], fg=colors[0])
         title_.grid(row=0, column=0, sticky="NWSW")
-        description_ = Label(self, text=description, font="Arial 9 normal", bg=c4, fg=c9)
+        description_ = Label(self, text=description, font="Arial 9 normal", bg=colors[3], fg=colors[0])
         description_.grid(row=1, column=0, sticky="NWSW")
 
 
 class MovieDetails(Frame):
     def __init__(self, parent, movie_title):
-        Frame.__init__(self, parent, padx=25, pady=25, bg=c7, border=0)
-        self.columnconfigure(0, weight=1)
-        self.grid(row=0, column=0, sticky="WENS")
+        Frame.__init__(self, parent, bg=colors[2], highlightthickness=0, pady=25)
+        self.pack(fill=BOTH, expand=True, padx=(25, 40))
 
-        card = Frame(self, bg=c9, border=0)
-        card.columnconfigure(0, minsize=180)
-        card.columnconfigure(1, weight=1)
-        card.grid(row=0, column=0, sticky="WENS")
+        # Find movie information by movie title
+        imdb_id = prepare.get_imdb_id_by_title(movie_title)
+        poster_url = ws.get_poster(imdb_id)
+        short_summary_text = ws.get_summaries(imdb_id)[0].text
+        summary_text = ws.get_summaries(imdb_id)[1].text
+        self.trailer_text = ws.get_trailer(imdb_id)
 
-        left = Frame(card, border=0)
+        # CARD
+        card = Frame(self, bg=colors[0], highlightthickness=0)
+        card.pack(fill=BOTH, expand=True)
+
+        # LEFT COLUMN - showing the movie poster
+        left = Frame(card, highlightthickness=0)
+        left.columnconfigure(0, weight=1)
+        # left.rowconfigure(0, weight=1)
         left.grid(row=0, column=0, sticky="WENS")
 
-        right = Frame(card, highlightthickness=2, padx=10, pady=10, bg=c9, border=0)
+        # RIGHT COLUMN - show details of the movie
+        right = Frame(card, highlightthickness=0, padx=10, pady=10, bg=colors[0])
+        right.rowconfigure(0, weight=1)
         right.grid(row=0, column=1, sticky="WENS")
 
         # TODO: select the right title, poster, short and long summary, link to trailer ..
-        poster_url = "https://m.media-amazon.com/images/M/MV5BNjA3NGExZDktNDlhZC00NjYyLTgwNmUtZWUzMDYwMTZjZWUyXkEyXkFqcGdeQXVyMTU1MDM3NDk0._V1_QL75_UX190_CR0,0,190,281_.jpg"
-        # urllib.request.urlretrieve(poster_url, "1.png")
+        # MOVIE POSTER
         poster_url = urllib.request.urlopen(poster_url).read()
         img = Image.open(io.BytesIO(poster_url))
         image = ImageTk.PhotoImage(img)
-        label1 = Label(left, image=image, bg=c9, width=180)
-        label1.image=image
+        label1 = Label(left, image=image, bg=colors[0], width=180, highlightthickness=0, border=0)
+        label1.image = image
+        # label1.columnconfigure(0, weight=1)
+        # label1.rowconfigure(0, weight=1)
         label1.grid(row=0, column=0, sticky="WENS")
 
-        title = Label(right, text=movie_title, font="Arial 20 bold", fg=c1, bg=c9)
+        # TITLE
+        title = Label(right, text=movie_title, font="Arial 20 bold", fg=colors[5], bg=colors[0])
         title.grid(row=0, column=0, sticky="NWSW")
 
-        genres = Label(right, text="Action, Fantasy, Sci-fi", bg=c9, fg=c10)
+        # GENRES
+        genres = Label(right, text="Action, Fantasy, Sci-fi", bg=colors[0], fg=colors[2])
         genres.grid(row=1, column=0, sticky="NWSW")
 
-        rating = Frame(right, pady=10, bg=c9)
+        # RATING
+        rating = Frame(right, pady=10, bg=colors[0])
         rating.columnconfigure(0, weight=1)
         rating.grid(row=2, column=0, sticky="WENS")
-        rating_label = Label(rating, text="Rating:", font="Arial 10 bold", bg=c9)
+        rating_label = Label(rating, text="Rating:", font="Arial 10 bold", bg=colors[0])
         rating_label.grid(row=0, column=0, sticky="NWSW")
-        rating_description = Label(rating, text="8.7", bg=c9)
+        rating_description = Label(rating, text="8.7", bg=colors[0])
         rating_description.grid(row=1, column=0, sticky="NWSW")
 
-        short_summary = Frame(right, pady=10, bg=c9)
+        # SHORT SUMMARY
+        short_summary = Frame(right, pady=10, bg=colors[0])
         short_summary.columnconfigure(0, weight=1)
         short_summary.grid(row=3, column=0, sticky="WENS")
-        short_summary_label = Label(short_summary, text="Short summary:", font="Arial 10 bold", bg=c9)
+        short_summary_label = Label(short_summary, text="Short summary:", font="Arial 10 bold", bg=colors[0])
         short_summary_label.grid(row=0, column=0, sticky="NWSW")
-        short_summary_description = Label(short_summary, text="SHORT SUMMARY HERE", bg=c9)
+        short_summary_description = Label(short_summary, text=short_summary_text,
+                                          bg=colors[0], wraplength=800, justify="left")
         short_summary_description.grid(row=1, column=0, sticky="NWSW")
 
-        summary = Frame(right, pady=10, bg=c9)
+        # SUMMARY
+        summary = Frame(right, pady=10, bg=colors[0])
         summary.columnconfigure(0, weight=1)
         summary.grid(row=4, column=0, sticky="WENS")
-        summary_label = Label(summary, text="Summary:", font="Arial 10 bold", bg=c9)
+        summary_label = Label(summary, text="Summary:", font="Arial 10 bold", bg=colors[0])
         summary_label.grid(row=0, column=0, sticky="NWSW")
-        summary_describtion = Label(summary, wraplength=800, text="SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERE SUMMARY HERESUMMARY HERE", bg=c9)
+        summary_describtion = Label(summary,
+                                    wraplength=800,
+                                    text=summary_text,
+                                    justify="left",
+                                    bg=colors[0])
         summary_describtion.grid(row=1, column=0, sticky="NWSW")
 
-        trailer = Frame(right, pady=10, bg=c9)
-        trailer.columnconfigure(0, weight=1)
-        trailer.grid(row=5, column=0, sticky="WENS")
-        trailer_label = Label(trailer, text="Trailer:", font="Arial 10 bold", bg=c9)
-        trailer_label.grid(row=0, column=0, sticky="NWSW")
-        trailer_link = Label(trailer, text="TRAILER LINK HERE", bg=c9)
+        # TRAILER LINK
+        self.trailer = Frame(right, pady=10, bg=colors[0])
+        self.trailer.columnconfigure(0, weight=1)
+        self.trailer.grid(row=5, column=0, sticky="WENS")
+        self.trailer_label = Label(self.trailer, text="Trailer:", font="Arial 10 bold", bg=colors[0])
+        self.trailer_label.grid(row=0, column=0, sticky="NWSW")
+        self.place_trailer_link()
+
+
+    def open_trailer(self, url):
+        webbrowser.open_new_tab(url)
+
+    def place_trailer_link(self):
+        if self.trailer_text != "":
+            trailer_link = Label(self.trailer, text=self.trailer_text, bg=colors[0],
+                                 fg="blue",
+                                 cursor="hand2")
+            trailer_link.bind("<Button-1>", lambda e: self.open_trailer(self.trailer_text))
+        else:
+            trailer_link = Label(self.trailer, text="No trailer registered", bg=colors[0])
         trailer_link.grid(row=1, column=0, sticky="NWSW")
 
 
 class RecommendationList(Frame):
-    def __init__(self, parent):
-        Frame.__init__(self, parent)
-        self.columnconfigure(0, weight=1)
-        self.grid(row=0, column=0, sticky="WENS")
-
-        # scroll_frame = LabelFrame()
-        #
-        # canvas = Canvas(self)
-        # canvas.pack(side=LEFT)
-        # scrollbar = Scrollbar(self, orient="vertical", command=canvas.yview())
-        # scrollbar.pack(side=RIGHT, fill="y")
-
-
-        # TODO: change to the correct list
-        for i in range(2):
+    def __init__(self, parent, recommendations):
+        Frame.__init__(self, parent, highlightthickness=0, bg=colors[2])
+        for i in recommendations:
             movie_details = MovieDetails(self, i)
-            movie_details.grid(row=i, column=0, sticky="WENS")
+            movie_details.pack(fill=BOTH, expand=True)
+
+
+class ScrollableFrame(Frame):
+    def __init__(self, parent, frame, recommendations):
+        Frame.__init__(self, parent)
+        self.pack(fill=BOTH, expand=True)
+
+        self.canvas = Canvas(self, highlightthickness=0, bg="blue")
+        self.canvas.pack(side=LEFT, fill=BOTH, expand=True)
+
+        self.frame = frame(self.canvas, recommendations)
+        self.canvas_frame = self.canvas.create_window((0, 0), window=self.frame, anchor=NW)
+
+        scroll = Scrollbar(self.canvas, orient="vertical", command=self.canvas.yview)
+        scroll.pack(side=RIGHT, fill=Y)
+        self.canvas.config(yscrollcommand=scroll.set)
+
+        self.frame.bind("<Configure>", self.OnFrameConfigure)
+        self.canvas.bind("<Configure>", self.FrameWidth)
+        self.canvas.bind("<Enter>", self._bind_mouse)
+        self.canvas.bind("<Leave>", self._unbind_mouse)
+
+    def FrameWidth(self, event):
+        canvas_width = event.width
+        self.canvas.itemconfig(self.canvas_frame, width=canvas_width)
+
+    def OnFrameConfigure(self, event):
+        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+
+    def _bind_mouse(self, event=None):
+        self.canvas.bind_all("<4>", self._on_mousewheel)
+        self.canvas.bind_all("<5>", self._on_mousewheel)
+        self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)
+
+    def _unbind_mouse(self, event=None):
+        self.canvas.unbind_all("<4>")
+        self.canvas.unbind_all("<5>")
+        self.canvas.unbind_all("<MouseWheel>")
+
+    def _on_mousewheel(self, event):
+        """Linux uses event.num; Windows / Mac uses event.delta"""
+        if event.num == 4 or event.delta > 0:
+            self.canvas.yview_scroll(-1, "units")
+        elif event.num == 5 or event.delta < 0:
+            self.canvas.yview_scroll(1, "units")
 
 
 if __name__ == '__main__':
