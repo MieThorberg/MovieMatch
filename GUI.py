@@ -215,14 +215,12 @@ class ContentFilter(Frame):
         frame.grid(row=3, column=0, sticky="WENS")
 
         button = Button(self, text="RUN", border=0, bg=colors[6], fg=colors[5],
-                        command=lambda: self.runCollaborativeFilter()
+                        command=lambda: self.run()
                         )
         button.grid(row=4, column=0, sticky="WENS")
 
-
     # TODO: use contentrecomander to get the recommendations
-
-    def runCollaborativeFilter(self):
+    def run(self):
         movie = self.movie_options.get()
         self.recommendations = content.recommend_movies(movie, 6)
         self.controller.reload_right_content(self.recommendations)
@@ -288,10 +286,6 @@ class MovieDetails(Frame):
 
         # Find movie information by movie title
         imdb_id = prepare.get_imdb_id_by_title(movie_title)
-        poster_url = ws.get_poster(imdb_id)
-        short_summary_text = ws.get_summaries(imdb_id)[0].text
-        self.summary_text = self.get_summary(imdb_id)
-        self.trailer_text = ws.get_trailer(imdb_id)
 
         # CARD
         card = Frame(self, bg=colors[0], highlightthickness=0)
@@ -307,62 +301,70 @@ class MovieDetails(Frame):
         right.rowconfigure(0, weight=1)
         right.grid(row=0, column=1, sticky="WENS")
 
-        # TODO: select the genres plus rating ..
-        # MOVIE POSTER
-        poster_url = urllib.request.urlopen(poster_url).read()
-        img = Image.open(io.BytesIO(poster_url))
-        image = ImageTk.PhotoImage(img)
-        label1 = Label(left, image=image, bg=colors[0], width=180, highlightthickness=0, border=0)
-        label1.image = image
-        label1.grid(row=0, column=0, sticky="WENS")
-
         # TITLE
         title = Label(right, text=movie_title, font="Arial 20 bold", fg=colors[5], bg=colors[0])
         title.grid(row=0, column=0, sticky="NWSW")
 
-        # GENRES
-        genres = Label(right, text="Action, Fantasy, Sci-fi", bg=colors[0], fg=colors[2])
-        genres.grid(row=1, column=0, sticky="NWSW")
+        # TODO: select the genres plus rating ..
+        if imdb_id != -1:
+            poster_url = ws.get_poster(imdb_id)
+            short_summary_text = ws.get_summaries(imdb_id)[0].text
+            self.summary_text = self.get_summary(imdb_id)
+            self.trailer_text = ws.get_trailer(imdb_id)
 
-        # RATING
-        rating = Frame(right, pady=10, bg=colors[0])
-        rating.columnconfigure(0, weight=1)
-        rating.grid(row=2, column=0, sticky="WENS")
-        rating_label = Label(rating, text="Rating:", font="Arial 10 bold", bg=colors[0])
-        rating_label.grid(row=0, column=0, sticky="NWSW")
-        rating_description = Label(rating, text="8.7", bg=colors[0])
-        rating_description.grid(row=1, column=0, sticky="NWSW")
+            # MOVIE POSTER
+            poster_url = urllib.request.urlopen(poster_url).read()
+            img = Image.open(io.BytesIO(poster_url))
+            image = ImageTk.PhotoImage(img)
+            label1 = Label(left, image=image, bg=colors[0], width=180, highlightthickness=0, border=0)
+            label1.image = image
+            label1.grid(row=0, column=0, sticky="WENS")
 
-        # SHORT SUMMARY
-        short_summary = Frame(right, pady=10, bg=colors[0])
-        short_summary.columnconfigure(0, weight=1)
-        short_summary.grid(row=3, column=0, sticky="WENS")
-        short_summary_label = Label(short_summary, text="Short summary:", font="Arial 10 bold", bg=colors[0])
-        short_summary_label.grid(row=0, column=0, sticky="NWSW")
-        short_summary_description = Label(short_summary, text=short_summary_text,
+
+
+            # GENRES
+            genres = Label(right, text="Action, Fantasy, Sci-fi", bg=colors[0], fg=colors[2])
+            genres.grid(row=1, column=0, sticky="NWSW")
+
+            # RATING
+            rating = Frame(right, pady=10, bg=colors[0])
+            rating.columnconfigure(0, weight=1)
+            rating.grid(row=2, column=0, sticky="WENS")
+            rating_label = Label(rating, text="Rating:", font="Arial 10 bold", bg=colors[0])
+            rating_label.grid(row=0, column=0, sticky="NWSW")
+            rating_description = Label(rating, text="8.7", bg=colors[0])
+            rating_description.grid(row=1, column=0, sticky="NWSW")
+
+            # SHORT SUMMARY
+            short_summary = Frame(right, pady=10, bg=colors[0])
+            short_summary.columnconfigure(0, weight=1)
+            short_summary.grid(row=3, column=0, sticky="WENS")
+            short_summary_label = Label(short_summary, text="Short summary:", font="Arial 10 bold", bg=colors[0])
+            short_summary_label.grid(row=0, column=0, sticky="NWSW")
+            short_summary_description = Label(short_summary, text=short_summary_text,
                                           bg=colors[0], wraplength=800, justify="left")
-        short_summary_description.grid(row=1, column=0, sticky="NWSW")
+            short_summary_description.grid(row=1, column=0, sticky="NWSW")
 
-        # SUMMARY
-        summary = Frame(right, pady=10, bg=colors[0])
-        summary.columnconfigure(0, weight=1)
-        summary.grid(row=4, column=0, sticky="WENS")
-        summary_label = Label(summary, text="Summary:", font="Arial 10 bold", bg=colors[0])
-        summary_label.grid(row=0, column=0, sticky="NWSW")
-        summary_describtion = Label(summary,
+            # SUMMARY
+            summary = Frame(right, pady=10, bg=colors[0])
+            summary.columnconfigure(0, weight=1)
+            summary.grid(row=4, column=0, sticky="WENS")
+            summary_label = Label(summary, text="Summary:", font="Arial 10 bold", bg=colors[0])
+            summary_label.grid(row=0, column=0, sticky="NWSW")
+            summary_describtion = Label(summary,
                                     wraplength=800,
                                     text=self.summary_text,
                                     justify="left",
                                     bg=colors[0])
-        summary_describtion.grid(row=1, column=0, sticky="NWSW")
+            summary_describtion.grid(row=1, column=0, sticky="NWSW")
 
-        # TRAILER LINK
-        self.trailer = Frame(right, pady=10, bg=colors[0])
-        self.trailer.columnconfigure(0, weight=1)
-        self.trailer.grid(row=5, column=0, sticky="WENS")
-        self.trailer_label = Label(self.trailer, text="Trailer:", font="Arial 10 bold", bg=colors[0])
-        self.trailer_label.grid(row=0, column=0, sticky="NWSW")
-        self.place_trailer_link()
+            # TRAILER LINK
+            self.trailer = Frame(right, pady=10, bg=colors[0])
+            self.trailer.columnconfigure(0, weight=1)
+            self.trailer.grid(row=5, column=0, sticky="WENS")
+            self.trailer_label = Label(self.trailer, text="Trailer:", font="Arial 10 bold", bg=colors[0])
+            self.trailer_label.grid(row=0, column=0, sticky="NWSW")
+            self.place_trailer_link()
 
 
     def open_trailer(self, url):

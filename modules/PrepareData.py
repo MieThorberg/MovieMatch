@@ -43,6 +43,9 @@ def get_id_by_title(title):
 def get_imdb_id_by_title(title):
     df = prepare_movie_data()
     # df = cr.prepare_data()
-    df = df[df['title'] == title]
-    imdb_id = df['imdb_id'].values[0]
+    try:
+        df = df[df['title'] == title]
+        imdb_id = df['imdb_id'].values[0] # remember ...
+    except:
+        imdb_id = -1
     return imdb_id

@@ -100,7 +100,7 @@ def recommend_movies(title, recommend_size):
     movie_index = movies[movies['title'] == title].index[0]
     distance = similarity[movie_index]
     movies_list = sorted(list(enumerate(distance)), reverse=True, key=lambda x: x[1])[1:recommend_size]
-
-    return movies_list
-    # for i in movies_list:
-    #     print(movies.iloc[i[0]].title)
+    _list = []
+    for i in movies_list:
+        _list.append(movies.iloc[i[0]].title)
+    return _list
