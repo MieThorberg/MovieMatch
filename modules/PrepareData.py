@@ -16,13 +16,16 @@ def prepare_movie_data():
 
 def get_all_movie_titles():
     data = cr.prepare_data()
-    movie_features_df = data.pivot_table(index='title')
+    movie_features_df = cr.create_rating_metrix(data)
     size = movie_features_df.shape[0]
     movies = []
     for i in range(0, size):
         movies.append(movie_features_df.index[i])
     return movies
 
+
+def get_movie_index_by_title(title):
+    return get_all_movie_titles().index(title)
 
 def get_id_by_title(title):
     # df = prepare_movie_data()

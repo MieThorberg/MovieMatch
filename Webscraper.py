@@ -19,7 +19,10 @@ def get_soup(url):
 def get_summaries(imdb_id):
     url = get_imdb_url(imdb_id) + "/plotsummary"
     # first p element contains a shorter summary than the rest p's
-    summaries = get_soup(url).find("ul", {"class": "ipl-zebra-list"}).findAll("p")[:2]
+    try:
+        summaries = get_soup(url).find("ul", {"class": "ipl-zebra-list"}).findAll("p")[:2]
+    except:
+        summaries = get_soup(url).find("ul", {"class": "ipl-zebra-list"}).findAll("p")[:1]
     return summaries
 
 
