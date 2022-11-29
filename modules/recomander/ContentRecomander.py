@@ -59,15 +59,18 @@ def convert_movie_data(movies):
     movies['Crew'] = movies['Crew'].apply(lambda x: [i.replace(" ", "") for i in x])
     return movies
 
-
-def prepare_movies():
+def load_filter_data():
     movies = load_movies()
     movie_credits = prepare_credits(load_credits())
     movies = merge_credits(movies, movie_credits)
     movies = movies[['Movie_id', 'title', 'Genres', "Keywords", 'overview', 'Cast', 'Crew']]
-    movies.isnull().sum()
     movies.dropna(inplace=True)
-    movies.isnull().sum()
+
+    return movies
+
+def prepare_movies():
+    movies = load_filter_data()
+
     # movies.duplicated().sum()
     movies = convert_movie_data(movies)
 
@@ -98,5 +101,6 @@ def recommend_movies(title, recommend_size):
     distance = similarity[movie_index]
     movies_list = sorted(list(enumerate(distance)), reverse=True, key=lambda x: x[1])[1:recommend_size]
 
-    for i in movies_list:
-        print(movies.iloc[i[0]].title)
+    return movies_list
+    # for i in movies_list:
+    #     print(movies.iloc[i[0]].title)
