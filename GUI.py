@@ -167,7 +167,9 @@ class CollaborativeFilter(Frame):
 
     def runCollaborativeFilter(self):
         # TODO: get the real index for movie
-        self.recommendations = cr.recommend_movies(2, 6)
+        movie = self.movie_options.get()
+        index = prepare.get_movie_index_by_title(movie)
+        self.recommendations = cr.recommend_movies(index, 6)
         self.controller.reload_right_content(self.recommendations)
 
 
@@ -232,7 +234,7 @@ class MovieDetails(Frame):
         imdb_id = prepare.get_imdb_id_by_title(movie_title)
         poster_url = ws.get_poster(imdb_id)
         short_summary_text = ws.get_summaries(imdb_id)[0].text
-        summary_text = ws.get_summaries(imdb_id)[1].text
+        self.summary_text = self.get_summary(imdb_id)
         self.trailer_text = ws.get_trailer(imdb_id)
 
         # CARD
@@ -242,7 +244,6 @@ class MovieDetails(Frame):
         # LEFT COLUMN - showing the movie poster
         left = Frame(card, highlightthickness=0)
         left.columnconfigure(0, weight=1)
-        # left.rowconfigure(0, weight=1)
         left.grid(row=0, column=0, sticky="WENS")
 
         # RIGHT COLUMN - show details of the movie
@@ -250,15 +251,13 @@ class MovieDetails(Frame):
         right.rowconfigure(0, weight=1)
         right.grid(row=0, column=1, sticky="WENS")
 
-        # TODO: select the right title, poster, short and long summary, link to trailer ..
+        # TODO: select the genres plus rating ..
         # MOVIE POSTER
         poster_url = urllib.request.urlopen(poster_url).read()
         img = Image.open(io.BytesIO(poster_url))
         image = ImageTk.PhotoImage(img)
         label1 = Label(left, image=image, bg=colors[0], width=180, highlightthickness=0, border=0)
         label1.image = image
-        # label1.columnconfigure(0, weight=1)
-        # label1.rowconfigure(0, weight=1)
         label1.grid(row=0, column=0, sticky="WENS")
 
         # TITLE
@@ -296,7 +295,7 @@ class MovieDetails(Frame):
         summary_label.grid(row=0, column=0, sticky="NWSW")
         summary_describtion = Label(summary,
                                     wraplength=800,
-                                    text=summary_text,
+                                    text=self.summary_text,
                                     justify="left",
                                     bg=colors[0])
         summary_describtion.grid(row=1, column=0, sticky="NWSW")
@@ -322,6 +321,13 @@ class MovieDetails(Frame):
         else:
             trailer_link = Label(self.trailer, text="No trailer registered", bg=colors[0])
         trailer_link.grid(row=1, column=0, sticky="NWSW")
+
+    def get_summary(self, imdb_id):
+        summaries = ws.get_summaries(imdb_id)
+        if len(summaries) == 1:
+            return "No summary registered"
+        else:
+            return summaries[1].text
 
 
 class RecommendationList(Frame):

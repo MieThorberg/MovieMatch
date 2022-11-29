@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1cd7a14e-44d8-4904-9b9c-9f62fcd84e6e" name="Changes" comment="refactor and added some new gui elements">
+    <list default="true" id="1cd7a14e-44d8-4904-9b9c-9f62fcd84e6e" name="Changes" comment="fix movie list issues">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CollaborativeRecomander.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/CollaborativeRecomander.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUI.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Main.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Webscraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/Webscraper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/PrepareData.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/PrepareData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/recomander/CollaborativeRecomander.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/recomander/CollaborativeRecomander.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,11 +61,11 @@
       <recent name="C:\Users\miemt\Desktop\MovieMatch" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\miemt\Desktop\MovieMatch\data" />
       <recent name="C:\Users\miemt\Desktop\MovieMatch\modules\clusters" />
       <recent name="C:\Users\miemt\Desktop\MovieMatch\modules\recomender" />
       <recent name="C:\Users\miemt\Desktop\MovieMatch" />
       <recent name="C:\Users\miemt\Desktop\MovieMatch\modules" />
-      <recent name="C:\Users\miemt\Desktop\MovieMatch\recomander" />
     </key>
   </component>
   <component name="RunManager">
@@ -116,7 +119,7 @@
       <workItem from="1669507469513" duration="5010000" />
       <workItem from="1669512685860" duration="18074000" />
       <workItem from="1669576231835" duration="16376000" />
-      <workItem from="1669620242243" duration="5497000" />
+      <workItem from="1669620242243" duration="15250000" />
     </task>
     <task id="LOCAL-00001" summary="python install">
       <created>1669118770086</created>
@@ -174,7 +177,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669628903107</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fix movie list issues">
+      <created>1669633339698</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1669633339698</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -200,10 +210,11 @@
     <MESSAGE value="add heat map plus genre bar plot" />
     <MESSAGE value="tilføjet analyse spørgsmål til readme" />
     <MESSAGE value="refactor and added some new gui elements" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor and added some new gui elements" />
+    <MESSAGE value="fix movie list issues" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix movie list issues" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MovieMatch$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1669630711584" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MovieMatch$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1669709216811" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MovieMatch$Main.coverage" NAME="Main Coverage Results" MODIFIED="1669031386856" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
