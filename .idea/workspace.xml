@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1cd7a14e-44d8-4904-9b9c-9f62fcd84e6e" name="Changes" comment="fix movie list issues">
+    <list default="true" id="1cd7a14e-44d8-4904-9b9c-9f62fcd84e6e" name="Changes" comment="fix a bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -9,6 +9,7 @@
 =======
 =======
       <change beforePath="$PROJECT_DIR$/CollaborativeRecomander.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/CollaborativeRecomander.ipynb" afterDir="false" />
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 8d23e382966dc9b1e028f00419a77be34aa9949e
 =======
@@ -22,6 +23,9 @@
 =======
       <change beforePath="$PROJECT_DIR$/modules/recomander/CollaborativeRecomander.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/recomander/CollaborativeRecomander.py" afterDir="false" />
 >>>>>>> c1ea020c4eadb6202f38d59574a69aede50eea51
+=======
+      <change beforePath="$PROJECT_DIR$/contentRecomander.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/contentRecomander.ipynb" afterDir="false" />
+>>>>>>> 9ee10b82b8fce6c33ecf118fc17f8931b3d8d264
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,8 +35,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jupyter Notebook" />
         <option value="Python Script" />
+        <option value="Jupyter Notebook" />
       </list>
     </option>
   </component>
@@ -132,7 +136,7 @@
       <workItem from="1669507469513" duration="5010000" />
       <workItem from="1669512685860" duration="18074000" />
       <workItem from="1669576231835" duration="16376000" />
-      <workItem from="1669620242243" duration="15250000" />
+      <workItem from="1669620242243" duration="17957000" />
     </task>
     <task id="LOCAL-00001" summary="python install">
       <created>1669118770086</created>
@@ -197,7 +201,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669633339698</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fix a bug">
+      <created>1669709766889</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1669709766889</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,7 +235,8 @@
     <MESSAGE value="tilføjet analyse spørgsmål til readme" />
     <MESSAGE value="refactor and added some new gui elements" />
     <MESSAGE value="fix movie list issues" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix movie list issues" />
+    <MESSAGE value="fix a bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix a bug" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
 <<<<<<< HEAD
