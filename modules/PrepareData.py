@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from ast import literal_eval
 import modules.recomander.CollaborativeRecomander as cr
+import modules.recomander.ContentRecomander as con
 
 
 def prepare_movie_data():
@@ -22,6 +23,10 @@ def get_all_movie_titles():
     for i in range(0, size):
         movies.append(movie_features_df.index[i])
     return movies
+
+def get_all_movie_titles1():
+    df = con.load_filter_data()
+    return df['title'].to_list()
 
 
 def get_movie_index_by_title(title):

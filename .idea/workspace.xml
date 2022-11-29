@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1cd7a14e-44d8-4904-9b9c-9f62fcd84e6e" name="Changes" comment="fix a bug">
+    <list default="true" id="1cd7a14e-44d8-4904-9b9c-9f62fcd84e6e" name="Changes" comment="refactor">
+      <change afterPath="$PROJECT_DIR$/modules/recomander/ContentRecomander.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/MovieRevenueVSBudget.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/MovieRevenueVSBudget.ipynb" afterDir="false" />
@@ -26,6 +28,14 @@
 =======
       <change beforePath="$PROJECT_DIR$/contentRecomander.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/contentRecomander.ipynb" afterDir="false" />
 >>>>>>> 9ee10b82b8fce6c33ecf118fc17f8931b3d8d264
+=======
+      <change beforePath="$PROJECT_DIR$/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Main.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MovieRevenueVSBudget.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/MovieRevenueVSBudget.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contentRecomander copy.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/contentRecomander copy.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contentRecomander.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/contentRecomander.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/PrepareData.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/PrepareData.py" afterDir="false" />
+>>>>>>> 2f4b4c341758f08511aec8125eac6d0aa6fa5a95
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,8 +45,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="Jupyter Notebook" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -136,7 +146,9 @@
       <workItem from="1669507469513" duration="5010000" />
       <workItem from="1669512685860" duration="18074000" />
       <workItem from="1669576231835" duration="16376000" />
-      <workItem from="1669620242243" duration="17957000" />
+      <workItem from="1669620242243" duration="21600000" />
+      <workItem from="1669716496965" duration="3600000" />
+      <workItem from="1669724738254" duration="2043000" />
     </task>
     <task id="LOCAL-00001" summary="python install">
       <created>1669118770086</created>
@@ -208,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669709766889</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="refactor">
+      <created>1669712798110</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1669712798110</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,15 +249,16 @@
     <MESSAGE value="added PrepareData.ipynb" />
     <MESSAGE value="added recomander module" />
     <MESSAGE value="fix bug" />
-    <MESSAGE value="refactor" />
     <MESSAGE value="add heat map plus genre bar plot" />
     <MESSAGE value="tilføjet analyse spørgsmål til readme" />
     <MESSAGE value="refactor and added some new gui elements" />
     <MESSAGE value="fix movie list issues" />
     <MESSAGE value="fix a bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix a bug" />
+    <MESSAGE value="refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -251,6 +271,9 @@
 =======
     <SUITE FILE_PATH="coverage/MovieMatch$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1669709216811" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
 >>>>>>> c1ea020c4eadb6202f38d59574a69aede50eea51
+=======
+    <SUITE FILE_PATH="coverage/MovieMatch$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1669716170711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+>>>>>>> 2f4b4c341758f08511aec8125eac6d0aa6fa5a95
     <SUITE FILE_PATH="coverage/MovieMatch$Main.coverage" NAME="Main Coverage Results" MODIFIED="1669031386856" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MovieMatch$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1669377331143" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
