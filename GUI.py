@@ -7,6 +7,7 @@ import modules.PrepareData as prepare
 import modules.recomander.CollaborativeRecomander as cr
 from PIL import ImageTk, Image
 import Webscraper as ws
+import modules.recomander.ContentRecomander as content
 import platform
 
 colors = [
@@ -166,7 +167,6 @@ class CollaborativeFilter(Frame):
         button.grid(row=3, column=0, sticky="WENS")
 
     def runCollaborativeFilter(self):
-        # TODO: get the real index for movie
         movie = self.movie_options.get()
         index = prepare.get_movie_index_by_title(movie)
         self.recommendations = cr.recommend_movies(index, 6)
@@ -180,11 +180,67 @@ class ContentPage(Frame):
         self.columnconfigure(0, minsize=375)
         self.columnconfigure(1, weight=1)
         self.grid(row=0, column=0, sticky="WENS")
-        # left_content = LeftContent(self, "Content Filtering",
-        #                            "We will recommend some movies by your filtering choices")
-        # CollaborativeFilter(left_content)
-        # RightContent(self)
 
+        LeftContent(self, "Content Filtering",
+                    "We will recommend some movies by your filtering choices", ContentFilter)
+        self.right_content = RightContent(self)
+
+    def reload_right_content(self, recommendations):
+        if len(recommendations) != 0:
+            scroll_frame = ScrollableFrame(self.right_content, RecommendationList, recommendations)
+            self.right_content.show_frame(scroll_frame)
+        else:
+            nothing_registered_frame = NothingRegisteredFrame(self.right_content)
+            self.right_content.show_frame(nothing_registered_frame)
+
+
+class ContentFilter(Frame):
+    all_movies = prepare.get_all_movie_titles1()
+    recommendations = []
+    def __init__(self, parent, controller):
+        self.controller = controller
+        Frame.__init__(self, parent, padx=15, pady=20, bg=colors[4])
+        self.columnconfigure(0, weight=1)
+        self.grid(row=1, column=0, sticky="WENS")
+
+        option_title = Label(self, text="Choose a movie you like:", font="Arial 10 bold", bg=colors[4], fg=colors[0])
+        option_title.grid(row=0, column=0, sticky="NWSW")
+
+        self.movie_options = Combobox(self, state="readonly", values=self.all_movies)
+        self.movie_options.set("Movies")
+        self.movie_options.grid(row=1, column=0, sticky="WENS")
+
+        frame = Frame(self, height=15, bg=colors[4])
+        frame.rowconfigure(0, weight=1)
+        frame.grid(row=3, column=0, sticky="WENS")
+
+        button = Button(self, text="RUN", border=0, bg=colors[6], fg=colors[5],
+                        command=lambda: self.runCollaborativeFilter()
+                        )
+        button.grid(row=4, column=0, sticky="WENS")
+
+
+    # TODO: use contentrecomander to get the recommendations
+
+    def runCollaborativeFilter(self):
+        movie = self.movie_options.get()
+        self.recommendations = content.recommend_movies(movie, 6)
+        self.controller.reload_right_content(self.recommendations)
+
+
+# class CheckBox(Checkbutton):
+#     def __init__(self, parent, text):
+#         self.var = IntVar(value=1)
+#         Checkbutton.__init__(self, parent, text=text, variable=self.var, command=self.setValue())
+#
+#     def setValue(self):
+#         if self.var.get() == 1:
+#             self.var.set(0)
+#         else:
+#             self.var.set(1)
+#
+#     def get(self):
+#         return self.var.get()
 
 class LeftContent(Frame):
     def __init__(self, parent, title, description, filter_frame):
