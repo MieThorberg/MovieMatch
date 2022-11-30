@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1cd7a14e-44d8-4904-9b9c-9f62fcd84e6e" name="Changes" comment="added PrepareData.ipynb">
-      <change beforePath="$PROJECT_DIR$/.idea/MovieMatch.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MovieMatch.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="1cd7a14e-44d8-4904-9b9c-9f62fcd84e6e" name="Changes" comment="add module for ContentRecomander.py">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieRevenueVSBudget.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/MovieRevenueVSBudget.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Main.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contentRecomander copy.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/contentRecomander copy.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/PrepareData.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/PrepareData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/recomander/ContentRecomander.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/recomander/ContentRecomander.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,25 +45,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/miemt/Desktop/MovieMatch",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.notebooks.jupyter.connections.configuration.JupyterServerConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/miemt/Desktop/MovieMatch/images&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.editor&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\miemt\Desktop\MovieMatch\images" />
       <recent name="C:\Users\miemt\Desktop\MovieMatch" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\miemt\Desktop\MovieMatch\data" />
       <recent name="C:\Users\miemt\Desktop\MovieMatch\modules\clusters" />
       <recent name="C:\Users\miemt\Desktop\MovieMatch\modules\recomender" />
       <recent name="C:\Users\miemt\Desktop\MovieMatch" />
       <recent name="C:\Users\miemt\Desktop\MovieMatch\modules" />
-      <recent name="C:\Users\miemt\Desktop\MovieMatch\recomander" />
     </key>
   </component>
   <component name="RunManager">
@@ -111,7 +114,14 @@
       <workItem from="1669110675208" duration="2224000" />
       <workItem from="1669276095136" duration="2231000" />
       <workItem from="1669358035740" duration="2113000" />
-      <workItem from="1669620234852" duration="4879000" />
+      <workItem from="1669412694586" duration="7097000" />
+      <workItem from="1669507469513" duration="5010000" />
+      <workItem from="1669512685860" duration="18074000" />
+      <workItem from="1669576231835" duration="16376000" />
+      <workItem from="1669620242243" duration="21600000" />
+      <workItem from="1669716496965" duration="3600000" />
+      <workItem from="1669724738254" duration="2043000" />
+      <workItem from="1669729393534" duration="872000" />
     </task>
     <task id="LOCAL-00001" summary="python install">
       <created>1669118770086</created>
@@ -155,7 +165,42 @@
       <option name="project" value="LOCAL" />
       <updated>1669383161730</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="tilføjet analyse spørgsmål til readme">
+      <created>1669387931019</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1669387931019</updated>
+    </task>
+    <task id="LOCAL-00008" summary="refactor and added some new gui elements">
+      <created>1669628903107</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1669628903107</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fix movie list issues">
+      <created>1669633339698</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1669633339698</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fix a bug">
+      <created>1669709766889</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1669709766889</updated>
+    </task>
+    <task id="LOCAL-00011" summary="refactor">
+      <created>1669712798110</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1669712798110</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -177,12 +222,16 @@
     <MESSAGE value="added PrepareData.ipynb" />
     <MESSAGE value="added recomander module" />
     <MESSAGE value="fix bug" />
-    <MESSAGE value="refactor" />
     <MESSAGE value="add heat map plus genre bar plot" />
-    <option name="LAST_COMMIT_MESSAGE" value="add heat map plus genre bar plot" />
+    <MESSAGE value="tilføjet analyse spørgsmål til readme" />
+    <MESSAGE value="refactor and added some new gui elements" />
+    <MESSAGE value="fix movie list issues" />
+    <MESSAGE value="fix a bug" />
+    <MESSAGE value="refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MovieMatch$Main.coverage" NAME="Main Coverage Results" MODIFIED="1669027927452" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MovieMatch$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1669385196447" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MovieMatch$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1669729569567" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MovieMatch$Main.coverage" NAME="Main Coverage Results" MODIFIED="1669031386856" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
