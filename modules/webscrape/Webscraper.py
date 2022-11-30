@@ -1,6 +1,9 @@
 import requests as rq
 from bs4 import BeautifulSoup
 
+# Webscraping from imdb.
+# See website: https://www.imdb.com
+
 
 def get_imdb_url(imdb_id):
     return "https://www.imdb.com/title/" + imdb_id
@@ -15,13 +18,14 @@ def get_soup(url):
     return soup
 
 
-# returns a list with one short and one detailed movie summary
+# returns a list with one short and one detailed movie summary,
 def get_summaries(imdb_id):
     url = get_imdb_url(imdb_id) + "/plotsummary"
-    # first p element contains a shorter summary than the rest p's
     try:
+        # first p element contains a shorter summary than the rest p's
         summaries = get_soup(url).find("ul", {"class": "ipl-zebra-list"}).findAll("p")[:2]
     except:
+        # some movies have only the one short summary registered at imdb
         summaries = get_soup(url).find("ul", {"class": "ipl-zebra-list"}).findAll("p")[:1]
     return summaries
 
@@ -38,6 +42,7 @@ def get_trailer(imdb_id):
         trailer = get_soup(url).find("a", {"data-testid": "videos-slate-overlay-1"}).attrs["href"]
         trailer = "https://www.imdb.com" + trailer
     except:
+        # some movies have no trailer registered at imdb
         trailer = ""
 
     return trailer
