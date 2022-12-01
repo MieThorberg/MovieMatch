@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1cd7a14e-44d8-4904-9b9c-9f62fcd84e6e" name="Changes" comment="add some comments to the webscraper and gui">
+    <list default="true" id="1cd7a14e-44d8-4904-9b9c-9f62fcd84e6e" name="Changes" comment="add icon image">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CollaborativeRecomander.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/todelete/CollaborativeRecomander.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/todelete/Main.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieRevenueVSBudget.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/todelete/MovieRevenueVSBudget.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clusterCollection.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/todelete/clusterCollection.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contentRecomander copy.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/todelete/contentRecomander copy.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contentRecomander.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/todelete/contentRecomander.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/todelete/test.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Main.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/PrepareData.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/PrepareData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/gui/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/gui/GUI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/recomander/CollaborativeRecomander.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/recommmender/CollaborativeRecommender.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/recomander/ContentRecomander.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/recommmender/ContentRecommender.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/webscrape/Webscraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/webscrape/Webscraper.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,21 +52,22 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/miemt/Desktop/MovieMatch/images&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/miemt/Desktop/MovieMatch/modules/gui&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\miemt\Desktop\MovieMatch\modules\gui" />
       <recent name="C:\Users\miemt\Desktop\MovieMatch\images" />
       <recent name="C:\Users\miemt\Desktop\MovieMatch" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\miemt\Desktop\MovieMatch\modules\recommmender" />
+      <recent name="C:\Users\miemt\Desktop\MovieMatch\images" />
       <recent name="C:\Users\miemt\Desktop\MovieMatch\todelete" />
       <recent name="C:\Users\miemt\Desktop\MovieMatch\modules\webscrape" />
       <recent name="C:\Users\miemt\Desktop\MovieMatch\modules\gui" />
-      <recent name="C:\Users\miemt\Desktop\MovieMatch\data" />
-      <recent name="C:\Users\miemt\Desktop\MovieMatch\modules\clusters" />
     </key>
   </component>
   <component name="RunManager">
@@ -126,7 +127,8 @@
       <workItem from="1669729393534" duration="1720000" />
       <workItem from="1669738635698" duration="4662000" />
       <workItem from="1669754098688" duration="9225000" />
-      <workItem from="1669793759710" duration="2996000" />
+      <workItem from="1669793759710" duration="35232000" />
+      <workItem from="1669878225547" duration="4825000" />
     </task>
     <task id="LOCAL-00001" summary="python install">
       <created>1669118770086</created>
@@ -219,7 +221,21 @@
       <option name="project" value="LOCAL" />
       <updated>1669800979868</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="add delete folder">
+      <created>1669802451343</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1669802451343</updated>
+    </task>
+    <task id="LOCAL-00015" summary="add icon image">
+      <created>1669802551362</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1669802551362</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -249,10 +265,12 @@
     <MESSAGE value="refactor" />
     <MESSAGE value="fix ContentRecomander.py to work with gui" />
     <MESSAGE value="add some comments to the webscraper and gui" />
-    <option name="LAST_COMMIT_MESSAGE" value="add some comments to the webscraper and gui" />
+    <MESSAGE value="add delete folder" />
+    <MESSAGE value="add icon image" />
+    <option name="LAST_COMMIT_MESSAGE" value="add icon image" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MovieMatch$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1669763391855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MovieMatch$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1669845639423" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MovieMatch$Main.coverage" NAME="Main Coverage Results" MODIFIED="1669031386856" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -74,7 +74,7 @@ def find_nearest_neighbours(movie_features_df, index, n_neighbours):
     model_knn = NearestNeighbors(metric='cosine', algorithm='brute')
     model_knn.fit(movie_features_df)
     distances, indices = model_knn.kneighbors(movie_features_df.iloc[index, :].values.reshape(1, -1),
-                                              n_neighbors=n_neighbours)
+                                              n_neighbors=n_neighbours+1)
     recommends = []
 
     for i in range(1, len(distances.flatten())):

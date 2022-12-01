@@ -1,3 +1,25 @@
+# Projekt: MovieMatch
+Projektet tager udgangspunkt i at lave et system som ville kunne  komme med forslag til film basseret på en valgt film. 
+
+Vi har med to slags forslag basseret på de to filtreringstyper: Collaborative-basseret og Content-basseret.
+
+![](images/GUI.png)
+
+### Teknologier:
+- (list of used technologies)
+
+
+### Installation guide
+
+
+### User guide
+
+
+### Status
+
+
+
+### Analyse spørgsmål
 # MovieMatch
 
 - Er der en sammenhæng mellem genre og ratings? Har brugeren nogle særlige præferencer til rating i forhold til valg af genre? Undersøg cluster-grupperne og se på rating og genre for denne gruppe

@@ -5,9 +5,9 @@ from tkinter import *
 from tkinter.ttk import Combobox
 from PIL import ImageTk, Image
 from modules.webscrape import Webscraper as ws
-import modules.recomander.CollaborativeRecomander as cr
+import modules.recommmender.CollaborativeRecommender as cr
 import modules.PrepareData as prepare
-import modules.recomander.ContentRecomander as content
+import modules.recommmender.ContentRecommender as content
 
 # Graphical User Interface (GUI)
 # Showing the results of recommendations by searching with Collaborative and Content filtering.
@@ -251,7 +251,7 @@ class CollaborativeFilter(Frame):
         # translate the title into an index
         index = prepare.get_movie_index_by_title(movie)
         # find the recommendations by the index of the movie
-        self.recommendations = cr.recommend_movies(index, 6)
+        self.recommendations = cr.recommend_movies(index, 5)
         # reload right content frame to view the new recommendations
         self.controller.reload_right_content(self.recommendations)
 
@@ -306,7 +306,7 @@ class ContentFilter(Frame):
         # find the movie selected from the filtering menu
         movie = self.movie_filter.getMovie()
         # find the recommendations by the title of the movie
-        self.recommendations = content.recommend_movies(movie, 6)
+        self.recommendations = content.recommend_movies(movie, 5)
         # reload right content frame to view the new recommendations
         self.controller.reload_right_content(self.recommendations)
 
@@ -387,6 +387,8 @@ class MovieDetails(Frame):
             short_summary_text = ws.get_summaries(imdb_id)[0].text
             self.summary_text = self.get_summary(imdb_id)
             self.trailer_text = ws.get_trailer(imdb_id)
+            genres_text = "Genre: " + ', '.join(ws.get_genres(imdb_id))
+            rating_text = ws.get_rating(imdb_id)
 
             # MOVIE POSTER
             poster_url = urllib.request.urlopen(poster_url).read()
@@ -397,7 +399,7 @@ class MovieDetails(Frame):
             label1.grid(row=0, column=0, sticky="WENS")
 
             # GENRES
-            genres = Label(right, text="Action, Fantasy, Sci-fi", bg=colors[0], fg=colors[2])
+            genres = Label(right, text=genres_text, bg=colors[0], fg=colors[2])
             genres.grid(row=1, column=0, sticky="NWSW")
 
             # RATING
@@ -406,7 +408,7 @@ class MovieDetails(Frame):
             rating.grid(row=2, column=0, sticky="WENS")
             rating_label = Label(rating, text="Rating:", font="Arial 10 bold", bg=colors[0])
             rating_label.grid(row=0, column=0, sticky="NWSW")
-            rating_description = Label(rating, text="8.7", bg=colors[0])
+            rating_description = Label(rating, text=rating_text, bg=colors[0])
             rating_description.grid(row=1, column=0, sticky="NWSW")
 
             # SHORT SUMMARY
