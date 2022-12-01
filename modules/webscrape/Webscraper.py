@@ -1,5 +1,7 @@
 import requests as rq
 from bs4 import BeautifulSoup
+import re
+
 
 # Webscraping from imdb.
 # See website: https://www.imdb.com
@@ -46,3 +48,24 @@ def get_trailer(imdb_id):
         trailer = ""
 
     return trailer
+
+
+def get_genres(imdb_id):
+    url = get_imdb_url(imdb_id)
+    a_list = get_soup(url).find("div", {"class", "ipc-chip-list__scroller"}).findAll("a", {
+        "class": "sc-16ede01-3 bYNgQ ipc-chip ipc-chip--on-baseAlt"})
+    genres = []
+    # use regex to get genre from an url
+    # url example: "/search/title?genres=adventure&amp;explore=title_type,genres&amp;ref_=tt_ov_inf"
+    genre_reg = re.compile(r'(?<=genres=)(\w*)')
+    for a in a_list:
+        url = a.attrs["href"]
+        genre = genre_reg.search(url)
+        genres.append(genre.group())
+    return genres
+
+
+def get_rating(imdb_id):
+    url = get_imdb_url(imdb_id)
+    rating = get_soup(url).find("span", {"class":"sc-7ab21ed2-1 jGRxWM"})
+    return rating.text
