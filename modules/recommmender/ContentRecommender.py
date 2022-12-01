@@ -24,12 +24,12 @@ def prepare_credits(movie_credits):
 def prepare_movies():
     movies = load_filter_data()
     movies = convert_movie_data(movies)
-
-    movies['tags'] = movies['Genres'] + movies['Keywords'] + movies['Cast'] + movies['Crew'] + movies['overview']
-
-    movies = movies[['Movie_id', 'title', 'tags']]
-    movies['tags'] = movies['tags'].apply(lambda x: " ".join(x))
-    movies['tags'] = movies['tags'].apply(lambda x: x.lower())
+    movies = generate_tags(movies)
+    # movies['tags'] = movies['Genres'] + movies['Keywords'] + movies['Cast'] + movies['Crew'] + movies['overview']
+    #
+    # movies = movies[['Movie_id', 'title', 'tags']]
+    # movies['tags'] = movies['tags'].apply(lambda x: " ".join(x))
+    # movies['tags'] = movies['tags'].apply(lambda x: x.lower())
     return movies
 
 
@@ -38,16 +38,18 @@ def merge_movie_and_credits(movies, movie_credits):
     return movies
 
 
-def convert(obj):
+def convert_all(obj):
     L = []
+    # return all words
     for i in ast.literal_eval(obj):
         L.append(i['name'])
     return L
 
 
-def convert3(obj):
+def convert_first_three(obj):
     L = []
     counter = 0
+    # return only the first three words
     for i in ast.literal_eval(obj):
         if counter != 3:
             L.append(i['name'])
@@ -55,8 +57,9 @@ def convert3(obj):
     return L
 
 
-def fetch_directoer(obj):
+def convert_director(obj):
     L = []
+    # return only the director
     for i in ast.literal_eval(obj):
         if i['job'] == "Director":
             L.append(i['name'])
@@ -64,24 +67,26 @@ def fetch_directoer(obj):
     return L
 
 
-# def remove_spaces(df, column_name):
-#     return df[column_name].apply(lambda x: [i.replace(" ", "") for i in x])
+def remove_spaces(df, column_name):
+    return df[column_name].apply(lambda x: [i.replace(" ", "") for i in x])
 
 
-# def convert_column(df, column_name, convert_method):
-#     df[column_name] = df[column_name].apply(convert_method)
+def split_text(df, column_name):
+    return df[column_name].apply(lambda x: x.split())
 
 
 def convert_movie_data(movies):
-    movies['Genres'] = movies['Genres'].apply(convert)
-    movies['Keywords'] = movies['Keywords'].apply(convert)
-    movies['Cast'] = movies['Cast'].apply(convert3)
-    movies['Crew'] = movies['Crew'].apply(fetch_directoer)
-    movies['overview'] = movies['overview'].apply(lambda x: x.split())
-    movies['Genres'] = movies['Genres'].apply(lambda x: [i.replace(" ", "") for i in x])
-    movies['Keywords'] = movies['Keywords'].apply(lambda x: [i.replace(" ", "") for i in x])
-    movies['Cast'] = movies['Cast'].apply(lambda x: [i.replace(" ", "") for i in x])
-    movies['Crew'] = movies['Crew'].apply(lambda x: [i.replace(" ", "") for i in x])
+    # traverse through the abstract syntax tree and converts the distance
+    movies['Genres'] = movies['Genres'].apply(convert_all)
+    movies['Keywords'] = movies['Keywords'].apply(convert_all)
+    movies['Cast'] = movies['Cast'].apply(convert_first_three)
+    movies['Crew'] = movies['Crew'].apply(convert_director)
+    # change the text format
+    movies['overview'] = split_text(movies, 'overview')
+    movies['Genres'] = remove_spaces(movies, 'Genres')
+    movies['Keywords'] = remove_spaces(movies, 'Keywords')
+    movies['Cast'] = remove_spaces(movies, 'Cast')
+    movies['Crew'] = remove_spaces(movies, 'Crew')
     return movies
 
 
@@ -94,8 +99,11 @@ def load_filter_data():
     return movies
 
 
-def create_tags(movie_df):
-    return
+def generate_tags(movie_df):
+    movie_df['tags'] = movie_df['Genres'] + movie_df['Keywords'] + movie_df['Cast'] + movie_df['Crew'] + movie_df['overview']
+    movie_df['tags'] = movie_df['tags'].apply(lambda x: " ".join(x))
+    movie_df['tags'] = movie_df['tags'].apply(lambda x: x.lower())
+    return movie_df
 
 
 def create_matrix_of_tag_words(movie_df):

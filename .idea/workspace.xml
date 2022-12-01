@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1cd7a14e-44d8-4904-9b9c-9f62fcd84e6e" name="Changes" comment="add icon image">
+    <list default="true" id="1cd7a14e-44d8-4904-9b9c-9f62fcd84e6e" name="Changes" comment="add jupiternotebooks and some refactor in the modules">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Main.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/PrepareData.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/PrepareData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/gui/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/gui/GUI.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/recomander/CollaborativeRecomander.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/recommmender/CollaborativeRecommender.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/recomander/ContentRecomander.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/recommmender/ContentRecommender.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/webscrape/Webscraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/webscrape/Webscraper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/recommmender/ContentRecommender.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/recommmender/ContentRecommender.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +123,7 @@
       <workItem from="1669738635698" duration="4662000" />
       <workItem from="1669754098688" duration="9225000" />
       <workItem from="1669793759710" duration="35232000" />
-      <workItem from="1669878225547" duration="4825000" />
+      <workItem from="1669878225547" duration="9359000" />
     </task>
     <task id="LOCAL-00001" summary="python install">
       <created>1669118770086</created>
@@ -235,7 +230,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669802551362</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="add jupiternotebooks and some refactor in the modules">
+      <created>1669886647025</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1669886647025</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,7 +269,8 @@
     <MESSAGE value="add some comments to the webscraper and gui" />
     <MESSAGE value="add delete folder" />
     <MESSAGE value="add icon image" />
-    <option name="LAST_COMMIT_MESSAGE" value="add icon image" />
+    <MESSAGE value="add jupiternotebooks and some refactor in the modules" />
+    <option name="LAST_COMMIT_MESSAGE" value="add jupiternotebooks and some refactor in the modules" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MovieMatch$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1669845639423" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
