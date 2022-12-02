@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="537a8cf7-a2e5-4821-9b14-445af5e10ab0" name="Changes" comment="add icon image">
       <change afterPath="$PROJECT_DIR$/Analyzertest.ipynb" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/modules/Analyser/Analyser.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/modules/Analyser/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todelete/MovieRevenueVSBudget.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/todelete/MovieRevenueVSBudget.ipynb" afterDir="false" />
+=======
+    <list default="true" id="1cd7a14e-44d8-4904-9b9c-9f62fcd84e6e" name="Changes" comment="add jupiternotebooks and some refactor in the modules">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Main.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/recommmender/ContentRecommender.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/recommmender/ContentRecommender.py" afterDir="false" />
+>>>>>>> b9c3e4e73d3be9bc897b7c42f123742817aa4e83
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +155,7 @@
       <workItem from="1669738635698" duration="4662000" />
       <workItem from="1669754098688" duration="9225000" />
       <workItem from="1669793759710" duration="35232000" />
-      <workItem from="1669878225547" duration="4825000" />
+      <workItem from="1669878225547" duration="9359000" />
     </task>
     <task id="LOCAL-00001" summary="python install">
       <created>1669118770086</created>
@@ -255,7 +262,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669802551362</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="add jupiternotebooks and some refactor in the modules">
+      <created>1669886647025</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1669886647025</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,7 +301,8 @@
     <MESSAGE value="add some comments to the webscraper and gui" />
     <MESSAGE value="add delete folder" />
     <MESSAGE value="add icon image" />
-    <option name="LAST_COMMIT_MESSAGE" value="add icon image" />
+    <MESSAGE value="add jupiternotebooks and some refactor in the modules" />
+    <option name="LAST_COMMIT_MESSAGE" value="add jupiternotebooks and some refactor in the modules" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MovieMatch$Main.coverage" NAME="Main Coverage Results" MODIFIED="1669027927452" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
