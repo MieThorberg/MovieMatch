@@ -381,7 +381,6 @@ class MovieDetails(Frame):
         title = Label(right, text=movie_title, font="Arial 20 bold", fg=colors[5], bg=colors[0])
         title.grid(row=0, column=0, sticky="NWSW")
 
-        # TODO: select the genres plus rating ..
         if imdb_id != -1:
             poster_url = ws.get_poster(imdb_id)
             short_summary_text = ws.get_summaries(imdb_id)[0].text
