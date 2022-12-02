@@ -37,7 +37,7 @@ def linear_regression_func(df, feat1, feat2):
 def revenue_predict(df,feat1,feat2,budget):
     reg = sk.LinearRegression()
     reg.fit(df[[feat1]], df[feat2])
-    coe = reg.coef_
+    coe = reg.coef_[0]
     interce = reg.intercept_
     revenue = coe * budget + interce
     return revenue
