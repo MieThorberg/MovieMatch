@@ -12,12 +12,18 @@ def prepare_data():
         ['budget', 'genres', 'id', 'imdb_id', 'original_title', 'popularity', 'release_date', 'revenue', 'runtime',
          'vote_average', 'vote_count', 'original_language', 'production_companies']]
     data = data[(data['genres'] != "[]")]
-    data['genres'] = data['genres'].fillna('[]').apply(literal_eval).apply(
-        lambda x: [i['name'] for i in x] if isinstance(x, list) else [])
+    data['genres'] = data['genres'].fillna('[]').apply(convert_all)
     data.dropna(inplace=True)
     data = data[(data.T != 0).all()]
     data['profit'] = data['revenue'] - data['budget']
     return data
+
+def convert_all(obj):
+    L = []
+    # return all words
+    for i in literal_eval(obj):
+        L.append(i['name'])
+    return L
 
 def linear_regression_func(df, feat1, feat2):
     reg = sk.LinearRegression()
@@ -120,6 +126,7 @@ def plot_production_company(df):
     getlist_companies = getDataList(df, 'production_companies')
     # Create New Dataset for Countries
     dfmovies_companies = pd.DataFrame(columns=['production_companies', 'movies'])
+
     dfmovies_companies['production_companies'] = getlist_companies  # Add Data from list to name column
     dfmovies_companies = dfmovies_companies.groupby('production_companies').agg({'movies': 'size'}).reset_index().sort_values('movies',ascending=False)
 
@@ -134,6 +141,7 @@ def plot_average_revenue_by_genre(df):
     genres = pd.DataFrame(genres)
     genres['revenue'] = df['revenue']
     mean_revenue = genres.groupby('genres').mean()
+    mean_revenue = mean_revenue.sort_values(by=['revenue'], ascending=False)
     mean_revenue.iloc[:20].plot(kind='bar', figsize=(16, 8), fontsize=13)
     # mean_revenue.plot(kind='barh',figsize = (8,6),fontsize=11)
     #
@@ -142,7 +150,13 @@ def plot_average_revenue_by_genre(df):
     plt.ylabel('Average Revenue', fontsize=13)
     sns.set_style("darkgrid")
 
-
+def average_revenue_by_genre(df):
+    genres = df['genres'].str[0]
+    genres = pd.DataFrame(genres)
+    genres['revenue'] = df['revenue']
+    mean_revenue = genres.groupby('genres').mean()
+    mean_revenue = mean_revenue.sort_values(by=['revenue'], ascending=False)
+    return mean_revenue
 def plot_average_ratings_by_genre(df):
     genres = df['genres'].str[0]
     genres = pd.DataFrame(genres)
@@ -152,4 +166,18 @@ def plot_average_ratings_by_genre(df):
     plt.title('Average IMDB rating by genre', fontsize=15)
     plt.xlabel('Average IMDB rating', fontsize=13)
     plt.ylabel('Genre', fontsize=13)
+    sns.set_style("darkgrid")
+
+def plot_average_revenue_by_prod(df):
+    prod = df['production_companies'].str[0]
+    prod = pd.DataFrame(prod)
+    prod['revenue'] = df['revenue']
+    mean_revenue = prod.groupby('production_companies').mean()
+    mean_revenue = mean_revenue.sort_values(by=['revenue'], ascending=False)
+    mean_revenue.iloc[:20].plot(kind='barh', figsize=(16, 8),fontsize=13)
+    # mean_revenue.plot(kind='barh',figsize = (8,6),fontsize=11)
+    #
+    plt.title('Average revenue by production_companies', fontsize=15)
+    plt.xlabel('Average Revenue', fontsize=13)
+    plt.ylabel('production_companies', fontsize=13)
     sns.set_style("darkgrid")
