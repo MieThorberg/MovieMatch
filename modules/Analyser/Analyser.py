@@ -5,6 +5,20 @@ import matplotlib.pyplot as plt
 import sklearn.linear_model as sk
 from ast import literal_eval
 
+
+def prepare_data():
+    data = pd.read_csv("data/movies_metadata.csv")
+    data = data[
+        ['budget', 'genres', 'id', 'imdb_id', 'original_title', 'popularity', 'release_date', 'revenue', 'runtime',
+         'vote_average', 'vote_count', 'original_language', 'production_companies']]
+    data = data[(data['genres'] != "[]")]
+    data['genres'] = data['genres'].fillna('[]').apply(literal_eval).apply(
+        lambda x: [i['name'] for i in x] if isinstance(x, list) else [])
+    data.dropna(inplace=True)
+    data = data[(data.T != 0).all()]
+    data['profit'] = data['revenue'] - data['budget']
+    return data
+
 def linear_regression_func(df, feat1, feat2):
     reg = sk.LinearRegression()
     reg.fit(df[[feat1]], df[feat2])
