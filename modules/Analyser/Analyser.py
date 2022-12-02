@@ -24,7 +24,7 @@ def revenue_predict(df,feat1,feat2,budget):
 
 def correlator(df, feat1, feat2):
     data_corr = df.corr()
-    return print("Correlation between budget and revenue is: ", data_corr.loc[feat1, feat2])
+    return print(f"Correlation between {feat1} and {feat2}  is: ", data_corr.loc[feat1, feat2])
 
 def average_revenue_by_month(df):
     # change string format to datetime format
@@ -94,10 +94,48 @@ def getDataList(df, xfeature):
     for x, xRows in df.iterrows():
         target_column = xRows[xfeature]
         if (target_column != 'unknown'):
-            strName = ast.literal_eval( target_column )
+            strName = literal_eval( target_column )
             for i in strName:
                 if(i['name'] != ''):
                     xlst.append(i['name'])
         else:
             xlst.append('unknown')
     return xlst
+
+def plot_production_company(df):
+    getlist_companies = getDataList(df, 'production_companies')
+    # Create New Dataset for Countries
+    dfmovies_companies = pd.DataFrame(columns=['production_companies', 'movies'])
+    dfmovies_companies['production_companies'] = getlist_companies  # Add Data from list to name column
+    dfmovies_companies = dfmovies_companies.groupby('production_companies').agg({'movies': 'size'}).reset_index().sort_values('movies',ascending=False)
+
+    dfmovies_companies.set_index('production_companies')
+    dfmovies_companies.set_index('production_companies').iloc[:20].plot(kind='barh', figsize=(16, 8), fontsize=13)
+    plt.title("Production Companies Vs Number Of Movies", fontsize=15)
+    plt.xlabel('Number Of Movies', fontsize=14)
+    sns.set_style("whitegrid")
+
+def plot_average_revenue_by_genre(df):
+    genres = df['genres'].str[0]
+    genres = pd.DataFrame(genres)
+    genres['revenue'] = df['revenue']
+    mean_revenue = genres.groupby('genres').mean()
+    mean_revenue.iloc[:20].plot(kind='bar', figsize=(16, 8), fontsize=13)
+    # mean_revenue.plot(kind='barh',figsize = (8,6),fontsize=11)
+    #
+    plt.title('Average revenue by genre', fontsize=15)
+    plt.xlabel('Genre', fontsize=13)
+    plt.ylabel('Average Revenue', fontsize=13)
+    sns.set_style("darkgrid")
+
+
+def plot_average_ratings_by_genre(df):
+    genres = df['genres'].str[0]
+    genres = pd.DataFrame(genres)
+    genres['vote_average'] = df['vote_average']
+    mean_rating = genres.groupby('genres').mean()
+    mean_rating.plot(kind='barh', figsize=(16, 8), fontsize=13)
+    plt.title('Average rating by genre', fontsize=15)
+    plt.xlabel('Average rating', fontsize=13)
+    plt.ylabel('Genre', fontsize=13)
+    sns.set_style("darkgrid")
