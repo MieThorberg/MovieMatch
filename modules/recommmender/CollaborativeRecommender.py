@@ -1,7 +1,8 @@
 import pandas as pd
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
-
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
 
 def load_rating():
     rating_df = pd.read_csv('data/ratings_small.csv', usecols=['userId', 'movieId', 'rating'],
@@ -81,6 +82,33 @@ def find_nearest_neighbours(movie_features_df, index, n_neighbours):
         recommends.append(movie_features_df.index[indices.flatten()[i]])
 
     return recommends
+
+
+def make_cluster(movie_df):
+    kmeans = KMeans(n_clusters=5)
+    kmeans.fit(movie_df)
+    movie_df['labels'] = kmeans.labels_
+    return movie_df
+
+
+def optimise_k_means(data, max_k):
+    means = [];
+    inertias = []
+
+    for k in range(1, max_k):
+        kmeans = KMeans(n_clusters = k)
+        kmeans.fit(data[[data.columns[1],data.columns[2]]])
+
+        means.append(k)
+        inertias.append(kmeans.inertia_)
+
+    fig = plt.subplots(figsize=(10,5))
+    plt.plot(means, inertias, 'o-')
+    plt.xlabel('Number of Clusters')
+    plt.ylabel('Inertia')
+    plt.grid(True)
+    plt.show()
+
 
 
 def recommend_movies(index, recommends_size):
