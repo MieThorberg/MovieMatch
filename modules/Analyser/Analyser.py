@@ -149,7 +149,7 @@ def plot_average_ratings_by_genre(df):
     genres['vote_average'] = df['vote_average']
     mean_rating = genres.groupby('genres').mean()
     mean_rating.plot(kind='barh', figsize=(16, 8), fontsize=13)
-    plt.title('Average rating by genre', fontsize=15)
-    plt.xlabel('Average rating', fontsize=13)
+    plt.title('Average IMDB rating by genre', fontsize=15)
+    plt.xlabel('Average IMDB rating', fontsize=13)
     plt.ylabel('Genre', fontsize=13)
     sns.set_style("darkgrid")
