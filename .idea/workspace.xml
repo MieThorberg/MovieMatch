@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2b7c87ef-1e3a-48c5-b470-3ab8b7b1a07a" name="Changes" comment="">
+<<<<<<< HEAD
+    <list default="true" id="537a8cf7-a2e5-4821-9b14-445af5e10ab0" name="Changes" comment="add icon image">
+      <change afterPath="$PROJECT_DIR$/Analyzertest.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/Analyser/Analyser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/Analyser/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovieRevenueVSBudget.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/MovieRevenueVSBudget.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todelete/MovieRevenueVSBudget.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/todelete/MovieRevenueVSBudget.ipynb" afterDir="false" />
+=======
+    <list default="true" id="1cd7a14e-44d8-4904-9b9c-9f62fcd84e6e" name="Changes" comment="add jupiternotebooks and some refactor in the modules">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/Main.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/recommmender/ContentRecommender.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/recommmender/ContentRecommender.py" afterDir="false" />
+>>>>>>> b9c3e4e73d3be9bc897b7c42f123742817aa4e83
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,8 +23,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jupyter Notebook" />
         <option value="Python Script" />
+        <option value="Jupyter Notebook" />
       </list>
     </option>
   </component>
@@ -46,24 +56,47 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/miemt/Desktop/MovieMatch/images&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.editor&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/miemt/Desktop/MovieMatch/modules/gui&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\miemt\Desktop\MovieMatch\modules\gui" />
       <recent name="C:\Users\miemt\Desktop\MovieMatch\images" />
       <recent name="C:\Users\miemt\Desktop\MovieMatch" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\miemt\Desktop\MovieMatch\data" />
-      <recent name="C:\Users\miemt\Desktop\MovieMatch\modules\clusters" />
-      <recent name="C:\Users\miemt\Desktop\MovieMatch\modules\recomender" />
-      <recent name="C:\Users\miemt\Desktop\MovieMatch" />
-      <recent name="C:\Users\miemt\Desktop\MovieMatch\modules" />
+      <recent name="C:\Users\miemt\Desktop\MovieMatch\modules\recommmender" />
+      <recent name="C:\Users\miemt\Desktop\MovieMatch\images" />
+      <recent name="C:\Users\miemt\Desktop\MovieMatch\todelete" />
+      <recent name="C:\Users\miemt\Desktop\MovieMatch\modules\webscrape" />
+      <recent name="C:\Users\miemt\Desktop\MovieMatch\modules\gui" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.Analyser">
+    <configuration name="Analyser" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="MovieMatch" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\ch__s\AppData\Local\Programs\Python\Python310\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/modules/Analyser" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/modules/Analyser/Analyser.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="GUI" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MovieMatch" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -77,7 +110,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GUI.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\miemt\Desktop\MovieMatch\modules\gui\GUI.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -88,6 +121,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Analyser" />
         <item itemvalue="Python.GUI" />
       </list>
     </recent_temporary>
@@ -117,7 +151,11 @@
       <workItem from="1669620242243" duration="21600000" />
       <workItem from="1669716496965" duration="3600000" />
       <workItem from="1669724738254" duration="2043000" />
-      <workItem from="1669729393534" duration="872000" />
+      <workItem from="1669729393534" duration="1720000" />
+      <workItem from="1669738635698" duration="4662000" />
+      <workItem from="1669754098688" duration="9225000" />
+      <workItem from="1669793759710" duration="35232000" />
+      <workItem from="1669878225547" duration="9359000" />
     </task>
     <task id="LOCAL-00001" summary="python install">
       <created>1669118770086</created>
@@ -196,7 +234,42 @@
       <option name="project" value="LOCAL" />
       <updated>1669712798110</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="fix ContentRecomander.py to work with gui">
+      <created>1669730361857</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1669730361857</updated>
+    </task>
+    <task id="LOCAL-00013" summary="add some comments to the webscraper and gui">
+      <created>1669800979868</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1669800979868</updated>
+    </task>
+    <task id="LOCAL-00014" summary="add delete folder">
+      <created>1669802451343</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1669802451343</updated>
+    </task>
+    <task id="LOCAL-00015" summary="add icon image">
+      <created>1669802551362</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1669802551362</updated>
+    </task>
+    <task id="LOCAL-00016" summary="add jupiternotebooks and some refactor in the modules">
+      <created>1669886647025</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1669886647025</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,10 +297,16 @@
     <MESSAGE value="fix movie list issues" />
     <MESSAGE value="fix a bug" />
     <MESSAGE value="refactor" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor" />
+    <MESSAGE value="fix ContentRecomander.py to work with gui" />
+    <MESSAGE value="add some comments to the webscraper and gui" />
+    <MESSAGE value="add delete folder" />
+    <MESSAGE value="add icon image" />
+    <MESSAGE value="add jupiternotebooks and some refactor in the modules" />
+    <option name="LAST_COMMIT_MESSAGE" value="add jupiternotebooks and some refactor in the modules" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MovieMatch$Main.coverage" NAME="Main Coverage Results" MODIFIED="1669031386856" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MovieMatch$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1669729569567" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MovieMatch$Main.coverage" NAME="Main Coverage Results" MODIFIED="1669027927452" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MovieMatch$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1669385196447" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MovieMatch$Analyser.coverage" NAME="Analyser Coverage Results" MODIFIED="1669887406486" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/modules/Analyser" />
   </component>
 </project>
