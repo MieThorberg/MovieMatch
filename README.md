@@ -3,6 +3,12 @@ Projektet tager udgangspunkt i at lave et system som ville kunne  komme med fors
 
 Vi har med to slags forslag basseret på de to filtreringstyper: Collaborative-basseret og Content-basseret.
 
+
+### HUSK:
+-> datasettet tager kun højde for biograf revenue, og derfor ikke salg af dvder..
+
+
+
 ![](images/GUI.png)
 
 ### Teknologier:
@@ -29,7 +35,7 @@ Vi har med to slags forslag basseret på de to filtreringstyper: Collaborative-b
 
 
 
-Analyse spørgsmål:
+Analyse spørgsmål:`
 1. Hvilket production companies har den største indtjening?
 2. I hvilket land har de den største indtjening?
 3. Er der sammenhæng i hvornår en film bliver udgivet på året i forhold til hvor stor indtjening filmen får?
@@ -38,3 +44,4 @@ Analyse spørgsmål:
 6. Vis et bar plot med den gennemsnitlige rating for alle genre
 7. Vis et bar plot med den gennemsnitlige indtjening for alle genre
 8. Hvilke film har haft den største rating indenfor de sidste 5 år? Hvilken genre tilhører disse film?
+`
