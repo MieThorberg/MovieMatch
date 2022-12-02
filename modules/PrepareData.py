@@ -43,7 +43,7 @@ def get_id_by_title(title):
 
 
 def get_imdb_id_by_title(title):
-    df = prepare_movie_data()
+    df = pd.read_csv("data/movies_metadata.csv")
     # df = cr.prepare_data()
     try:
         df = df[df['title'] == title]
