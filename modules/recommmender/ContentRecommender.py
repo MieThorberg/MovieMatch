@@ -25,11 +25,6 @@ def prepare_movies():
     movies = load_filter_data()
     movies = convert_movie_data(movies)
     movies = generate_tags(movies)
-    # movies['tags'] = movies['Genres'] + movies['Keywords'] + movies['Cast'] + movies['Crew'] + movies['overview']
-    #
-    # movies = movies[['Movie_id', 'title', 'tags']]
-    # movies['tags'] = movies['tags'].apply(lambda x: " ".join(x))
-    # movies['tags'] = movies['tags'].apply(lambda x: x.lower())
     return movies
 
 
@@ -76,7 +71,7 @@ def split_text(df, column_name):
 
 
 def convert_movie_data(movies):
-    # traverse through the abstract syntax tree and converts the distance
+    # traverse through the abstract syntax tree and converts to a list of words
     movies['Genres'] = movies['Genres'].apply(convert_all)
     movies['Keywords'] = movies['Keywords'].apply(convert_all)
     movies['Cast'] = movies['Cast'].apply(convert_first_three)
@@ -139,3 +134,7 @@ def recommend_movies(title, recommend_size):
     for i in movies_list:
         _list.append(movies.iloc[i[0]].title)
     return _list
+
+
+def find_movie_index_by_title(movie_df, title):
+    return movie_df[movie_df['title'] == title].index[0]
