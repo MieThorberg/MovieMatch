@@ -14,6 +14,8 @@ def prepare_data():
     data = data[(data['genres'] != "[]")]
     data['genres'] = data['genres'].fillna('[]').apply(convert_all)
     data['production_companies'] = data['production_companies'].fillna('[]').apply(convert_all)
+    data['release_date'] = pd.to_datetime(data['release_date'])
+    data['years'] = data['release_date'].dt.year
     data.dropna(inplace=True)
     data = data[(data.T != 0).all()]
     data['profit'] = data['revenue'] - data['budget']
@@ -50,7 +52,7 @@ def correlator(df, feat1, feat2):
 def average_revenue_by_month(df):
     # change string format to datetime format
     months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    df['release_date'] = pd.to_datetime(df['release_date'])
+
     df['release_date'].head()
 
     month_release = df['release_date'].dt.month
@@ -97,7 +99,7 @@ def plot_genre_pie(df,feat):
         i = i + 1
 
     plt.rc('font', weight='bold')
-    f, ax = plt.subplots(figsize=(10, 10))
+    fig, ax = plt.subplots(figsize=(10, 10))
     genre_count.sort(key=lambda x: x[1], reverse=True)
     labels, sizes = zip(*genre_count)
     labels_selected = [n if v > sum(sizes) * 0.01 else '' for n, v in genre_count]
@@ -114,7 +116,9 @@ def plot_production_company(df):
     dfmovies_companies = pd.DataFrame(columns=['production_companies', 'movies'])
 
     dfmovies_companies['production_companies'] = df['production_companies'].str[0]  # Add Data from list to name column
+    print('Shape:',dfmovies_companies.shape)
     dfmovies_companies = dfmovies_companies.groupby('production_companies').agg({'movies': 'size'}).reset_index().sort_values('movies',ascending=False)
+    print(dfmovies_companies.head())
 
     dfmovies_companies.set_index('production_companies').iloc[:20].plot(kind='barh', figsize=(16, 8), fontsize=13)
     plt.title("Production Companies Vs Number Of Movies", fontsize=15)
@@ -166,3 +170,35 @@ def plot_average_revenue_by_prod(df):
     plt.xlabel('Average Revenue', fontsize=13)
     plt.ylabel('production_companies', fontsize=13)
     sns.set_style("darkgrid")
+
+def plot_vote_average_by_years(df,year1, year2):
+    plt.figure(figsize=(10, 6))
+    df[(df['years'] < year2) & (df['years'] >= year1)].groupby(by='years').mean()['vote_average'].plot();
+    plt.ylabel("Vote Average", fontsize=13)
+    plt.xlabel("Years", fontsize=13)
+
+    plt.title(f"Vote Average | {year1}-{year2}", fontsize=13);
+
+def plot_distribution(df, feat1,feat2):
+    # there's a long tail in the distribution, so let's put it on a log scale instead
+    # log_binsize = 0.025
+    log_binsize = 0.09
+
+    budget_bins = 10 ** np.arange(2.4, np.log10(df[feat1].max()) + log_binsize, log_binsize)
+    revenue_bins = 10 ** np.arange(2.4, np.log10(df[feat2].max()) + log_binsize, log_binsize)
+
+    # plt.figure(figsize=[8, 5])
+    plt.figure(figsize=[11.69, 8.27])
+    plt.hist(data=df, x=feat1, bins=budget_bins, alpha=0.5)
+    plt.hist(data=df, x=feat2, bins=revenue_bins, alpha=0.5)
+
+    plt.xscale('log')
+    # plt.xticks([500, 1e3, 2e3, 5e3, 1e4, 2e4], [500, '1k', '2k', '5k', '10k', '20k'])
+    # plt.xticks([500, 10^3, 10^4, 10^5, 10^6, 10^8], [500, '1k', '10k', '1M', '10M', '10B'])
+
+    plt.xlabel(f'{feat1} ($)', fontsize=13)
+    plt.ylabel('Frequency', fontsize=13)
+
+    plt.title('Budget & Revenue Distributions', fontsize=13)
+    plt.legend([feat1, feat2])
+    plt.show()
