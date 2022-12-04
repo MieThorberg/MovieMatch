@@ -13,6 +13,7 @@ def prepare_data():
          'vote_average', 'vote_count', 'original_language', 'production_companies']]
     data = data[(data['genres'] != "[]")]
     data['genres'] = data['genres'].fillna('[]').apply(convert_all)
+    data['production_companies'] = data['production_companies'].fillna('[]').apply(convert_all)
     data.dropna(inplace=True)
     data = data[(data.T != 0).all()]
     data['profit'] = data['revenue'] - data['budget']
@@ -107,30 +108,14 @@ def plot_genre_pie(df,feat):
     plt.tight_layout()
 
 
-# Function to extract the list of Name
-# From Columns Contains List of Names
-def getDataList(df, xfeature):
-    xlst = []
-    for x, xRows in df.iterrows():
-        target_column = xRows[xfeature]
-        if (target_column != 'unknown'):
-            strName = literal_eval( target_column )
-            for i in strName:
-                if(i['name'] != ''):
-                    xlst.append(i['name'])
-        else:
-            xlst.append('unknown')
-    return xlst
-
 def plot_production_company(df):
-    getlist_companies = getDataList(df, 'production_companies')
+    #getlist_companies = getDataList(df, 'production_companies')
     # Create New Dataset for Countries
     dfmovies_companies = pd.DataFrame(columns=['production_companies', 'movies'])
 
-    dfmovies_companies['production_companies'] = getlist_companies  # Add Data from list to name column
+    dfmovies_companies['production_companies'] = df['production_companies'].str[0]  # Add Data from list to name column
     dfmovies_companies = dfmovies_companies.groupby('production_companies').agg({'movies': 'size'}).reset_index().sort_values('movies',ascending=False)
 
-    dfmovies_companies.set_index('production_companies')
     dfmovies_companies.set_index('production_companies').iloc[:20].plot(kind='barh', figsize=(16, 8), fontsize=13)
     plt.title("Production Companies Vs Number Of Movies", fontsize=15)
     plt.xlabel('Number Of Movies', fontsize=14)
