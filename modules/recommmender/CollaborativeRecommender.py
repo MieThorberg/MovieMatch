@@ -42,7 +42,7 @@ def prepare_df_data(df):
 
 
 def count_ratings(df):
-    # groups all of same title, counts all the ratings and remanes ratings to totalRatingCount
+    # groups all the same title, counts all the ratings and renames ratings to totalRatingCount
     rating_counts_df = (df.
     groupby(by=['title'])['rating'].
     count().
