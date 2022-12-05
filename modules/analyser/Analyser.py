@@ -19,12 +19,6 @@ def prepare_data():
     data['profit'] = data['revenue'] - data['budget']
     return data
 
-def convert_all(obj):
-    L = []
-    # return all words
-    for i in literal_eval(obj):
-        L.append(i['name'])
-    return L
 
 def linear_regression_func(df, feat1, feat2):
     reg = sk.LinearRegression()
