@@ -9,11 +9,23 @@ from ast import literal_eval
 def prepare_data():
     data = pd.read_csv("data/movies_metadata.csv")
     data = data[
-        ['budget', 'genres', 'id', 'imdb_id', 'original_title', 'popularity', 'release_date', 'revenue', 'runtime',
+        ['budget', 'genres', 'id', 'original_title', 'popularity', 'release_date', 'revenue', 'runtime',
          'vote_average', 'vote_count', 'original_language', 'production_companies']]
-    data = data[(data['genres'] != "[]")]
-    data['genres'] = data['genres'].fillna('[]').apply(convert_all)
-    data['production_companies'] = data['production_companies'].fillna('[]').apply(convert_all)
+    # data = data[(data['genres'] != "[]")]
+    # data['genres'] = data['genres'].fillna('[]').apply(convert_all)
+    # data['production_companies'] = data['production_companies'].fillna('[]').apply(convert_all)
+
+
+    # production_companies
+    data['production_companies'] = \
+    data.loc[data['production_companies'].notna(), 'production_companies'].str.split("'name': ").str[1].str.split("'").str[
+        1]
+
+    # genres
+    data['genres'] = data.loc[data['genres'].notna(), 'genres'].str.split("'name': ").str[1].str.split("'").str[1]
+
+    data['release_date'] = pd.to_datetime(data['release_date'])
+    data['years'] = data['release_date'].dt.year
     data.dropna(inplace=True)
     data = data[(data.T != 0).all()]
     data['profit'] = data['revenue'] - data['budget']
@@ -44,7 +56,7 @@ def correlator(df, feat1, feat2):
 def average_revenue_by_month(df):
     # change string format to datetime format
     months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    df['release_date'] = pd.to_datetime(df['release_date'])
+
     df['release_date'].head()
 
     month_release = df['release_date'].dt.month
@@ -69,18 +81,18 @@ def plot_correlation_map( df ):
     _ = sns.heatmap(corr,cmap = cmap,square=True, cbar_kws={ 'shrink' : .9 }, ax=ax, annot = True, annot_kws = { 'fontsize' : 12 })
 
 def count(df, feat):
-    genres = df[feat].str[0]
+    genres = df[feat]
     data = pd.Series(genres)
     count = data.value_counts(ascending=False)
     return count
 
 def plot_genre(df, feat):
-
     count1 = count(df,feat)
+    print(count1)
     plt.title(f'{feat} (1915 - 2017)', fontsize=15)
     plt.xlabel(feat, fontsize=13)
     plt.ylabel('Amount of Movies', fontsize=13)
-    count1.plot(kind="bar")
+    count1.plot(kind="bar" )
 
 def plot_genre_pie(df,feat):
     total_genre_movies = count(df,feat)
@@ -91,7 +103,7 @@ def plot_genre_pie(df,feat):
         i = i + 1
 
     plt.rc('font', weight='bold')
-    f, ax = plt.subplots(figsize=(10, 10))
+    fig, ax = plt.subplots(figsize=(10, 10))
     genre_count.sort(key=lambda x: x[1], reverse=True)
     labels, sizes = zip(*genre_count)
     labels_selected = [n if v > sum(sizes) * 0.01 else '' for n, v in genre_count]
@@ -107,8 +119,10 @@ def plot_production_company(df):
     # Create New Dataset for Countries
     dfmovies_companies = pd.DataFrame(columns=['production_companies', 'movies'])
 
-    dfmovies_companies['production_companies'] = df['production_companies'].str[0]  # Add Data from list to name column
+    dfmovies_companies['production_companies'] = df['production_companies']  # Add Data from list to name column
+    print('Shape:',dfmovies_companies.shape)
     dfmovies_companies = dfmovies_companies.groupby('production_companies').agg({'movies': 'size'}).reset_index().sort_values('movies',ascending=False)
+    print(dfmovies_companies.head())
 
     dfmovies_companies.set_index('production_companies').iloc[:20].plot(kind='barh', figsize=(16, 8), fontsize=13)
     plt.title("Production Companies Vs Number Of Movies", fontsize=15)
@@ -116,7 +130,7 @@ def plot_production_company(df):
     sns.set_style("whitegrid")
 
 def plot_average_revenue_by_genre(df):
-    genres = df['genres'].str[0]
+    genres = df['genres']
     genres = pd.DataFrame(genres)
     genres['revenue'] = df['revenue']
     mean_revenue = genres.groupby('genres').mean()
@@ -130,14 +144,14 @@ def plot_average_revenue_by_genre(df):
     sns.set_style("darkgrid")
 
 def average_revenue_by_genre(df):
-    genres = df['genres'].str[0]
+    genres = df['genres']
     genres = pd.DataFrame(genres)
     genres['revenue'] = df['revenue']
     mean_revenue = genres.groupby('genres').mean()
     mean_revenue = mean_revenue.sort_values(by=['revenue'], ascending=False)
     return mean_revenue
 def plot_average_ratings_by_genre(df):
-    genres = df['genres'].str[0]
+    genres = df['genres']
     genres = pd.DataFrame(genres)
     genres['vote_average'] = df['vote_average']
     mean_rating = genres.groupby('genres').mean()
@@ -148,7 +162,7 @@ def plot_average_ratings_by_genre(df):
     sns.set_style("darkgrid")
 
 def plot_average_revenue_by_prod(df):
-    prod = df['production_companies'].str[0]
+    prod = df['production_companies']
     prod = pd.DataFrame(prod)
     prod['revenue'] = df['revenue']
     mean_revenue = prod.groupby('production_companies').mean()
@@ -160,3 +174,31 @@ def plot_average_revenue_by_prod(df):
     plt.xlabel('Average Revenue', fontsize=13)
     plt.ylabel('production_companies', fontsize=13)
     sns.set_style("darkgrid")
+
+def plot_vote_average_by_years(df,year1, year2):
+    plt.figure(figsize=(10, 6))
+    df[(df['years'] < year2) & (df['years'] >= year1)].groupby(by='years').mean()['vote_average'].plot();
+    plt.ylabel("Vote Average", fontsize=13)
+    plt.xlabel("Years", fontsize=13)
+
+    plt.title(f"Vote Average | {year1}-{year2}", fontsize=13);
+
+def plot_distribution(df, feat1,feat2):
+    # there's a long tail in the distribution, so let's put it on a log scale instead
+    log_binsize = 0.09
+
+    budget_bins = 10 ** np.arange(2.4, np.log10(df[feat1].max()) + log_binsize, log_binsize)
+    revenue_bins = 10 ** np.arange(2.4, np.log10(df[feat2].max()) + log_binsize, log_binsize)
+
+    plt.figure(figsize=[11.69, 8.27])
+    plt.hist(data=df, x=feat1, bins=budget_bins, alpha=0.5)
+    plt.hist(data=df, x=feat2, bins=revenue_bins, alpha=0.5)
+
+    plt.xscale('log')
+
+    plt.xlabel(f'{feat1} ($)', fontsize=13)
+    plt.ylabel('Frequency', fontsize=13)
+
+    plt.title('Budget & Revenue Distributions', fontsize=13)
+    plt.legend([feat1, feat2])
+    plt.show()
