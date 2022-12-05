@@ -1,13 +1,7 @@
 import pandas as pd
-import numpy as np
 from sklearn.neighbors import NearestNeighbors
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
-
-def load_rating():
-    rating_df = pd.read_csv('data/ratings_small.csv', usecols=['userId', 'movieId', 'rating'],
-                            dtype={'userId': 'int32', 'movieId': 'int32', 'rating': 'float32'})
-    return rating_df
 
 
 def load_movies():
@@ -15,7 +9,13 @@ def load_movies():
     return movies_df
 
 
-def prepare_movie_data(movies_df):
+def load_ratings():
+    ratings_df = pd.read_csv('data/ratings_small.csv', usecols=['userId', 'movieId', 'rating'],
+                            dtype={'userId': 'int32', 'movieId': 'int32', 'rating': 'float32'})
+    return ratings_df
+
+
+def prepare_movies(movies_df):
     # drops Nan values
     movies_df.dropna(inplace=True)
     # defines Dtype of id
@@ -25,50 +25,49 @@ def prepare_movie_data(movies_df):
     return movies_df
 
 
-def merge_movie_and_rating(rating_df, movies_df):
-    df = pd.merge(rating_df, movies_df, on='movieId')
+def prepare_data():
+    rating_df = load_ratings()
+    movies_df = prepare_movies(load_movies())
+    df = prepare_df_data(merge_movies_and_ratings(rating_df, movies_df))
     return df
+
+
+def prepare_df_data(df):
+    rating_counts_df = count_ratings(df)
+    # merges the totalRatingCount on title
+    rating_with_total_rating_counts_df = merge_total_rating_counts(df, rating_counts_df)
+    # removes all movies with less than 20 rating counts
+    popular_movies_df = get_popular_movies(rating_with_total_rating_counts_df, 20)
+    return popular_movies_df
 
 
 def count_ratings(df):
     # groups all of same title, counts all the ratings and remanes ratings to totalRatingCount
-    movie_rating_count = (df.
+    rating_counts_df = (df.
     groupby(by=['title'])['rating'].
     count().
     reset_index().
     rename(columns={'rating': 'totalRatingCount'})
     [['title', 'totalRatingCount']]
     )
-    return movie_rating_count
+    return rating_counts_df
 
 
-def prepare_df_data(df):
-    movie_rating_count = count_ratings(df)
-    # merges the totalRatingCount on title
-    rating_with_total_rating_count = df.merge(movie_rating_count, left_on='title', right_on='title', how='left')
-    rating_popular_movie = get_popular_movies(rating_with_total_rating_count)
-    return rating_popular_movie
+def merge_movies_and_ratings(ratings_df, movies_df):
+    return pd.merge(ratings_df, movies_df, on='movieId')
 
 
-def get_popular_movies(rating_with_total_rating_count):
-    # removes all movies with less then 50 ppl rating them.
-    popularity_threshold = 50
-    rating_popular_movie = rating_with_total_rating_count[
-        rating_with_total_rating_count['totalRatingCount'] >= popularity_threshold]
-    return rating_popular_movie
+def merge_total_rating_counts(df, rating_counts_df):
+    return df.merge(rating_counts_df, left_on='title', right_on='title', how='left')
 
 
-def prepare_data():
-    rating_df = load_rating()
-    movies_df = prepare_movie_data(load_movies())
-    df = prepare_df_data(merge_movie_and_rating(rating_df, movies_df))
-    return df
+def get_popular_movies(rating_with_total_rating_counts_df, popularity_threshold):
+    return rating_with_total_rating_counts_df[
+        rating_with_total_rating_counts_df['totalRatingCount'] >= popularity_threshold]
 
 
-def create_rating_metrix(df):
-    # puts all movie and user in a metrix with ratings
-    movie_features_df = df.pivot_table(index='title', columns='userId', values='rating').fillna(0)
-    return movie_features_df
+def transform_df(df):
+    return df.pivot_table(index='title', columns='userId', values='rating').fillna(0)
 
 
 def find_nearest_neighbours(movie_features_df, index, n_neighbours):
@@ -110,9 +109,27 @@ def optimise_k_means(data, max_k):
     plt.show()
 
 
-
 def recommend_movies(index, recommends_size):
     df = prepare_data()
-    movie_features_df = create_rating_metrix(df)
-    recommends = find_nearest_neighbours(movie_features_df, index, recommends_size)
+    new_df = transform_df(df)
+    recommends = find_nearest_neighbours(new_df, index, recommends_size)
     return recommends
+
+
+def get_movie_index_by_title(title):
+    data = prepare_data()
+    df = transform_df(data)
+    for i in range(len(df)):
+        if df.index[i] == title:
+            return i
+    return -1
+
+
+def get_all_movie_titles():
+    data = prepare_data()
+    df = transform_df(data)
+    size = df.shape[0]
+    movies = []
+    for i in range(0, size):
+        movies.append(df.index[i])
+    return movies

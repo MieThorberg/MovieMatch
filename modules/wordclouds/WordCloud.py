@@ -7,20 +7,16 @@ import matplotlib.pyplot as plt
 # illustrates the most frequently words in a text
 
 
-def join_list_of_strings(_list):
-    return ' '.join(i for i in _list)
-
-
 def create_cloud(text):
-    cloud = WordCloud(background_color="white", max_words=75)
+    cloud = WordCloud(background_color="white", width=1000, height=500)
     cloud.generate(text)
     return cloud
 
 
 # shows a cloud in the shape of the image
-def show_image_cloud(text, image_path):
+def create_image_cloud(text, image_path):
     cloud_mask = np.array(Image.open(image_path))
-    cloud = WordCloud(mask=cloud_mask, background_color="white", max_words=75)
+    cloud = WordCloud(mask=cloud_mask, background_color="white", width=1000, height=500)
     cloud.generate(text)
     return cloud
 

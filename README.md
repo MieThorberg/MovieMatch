@@ -42,6 +42,9 @@ Der vil laves et grafisk interface, som vi vil bruge til at vise resultatet af f
 
 ### User guide
 
+run gui:
+
+python GUI.py
 
 ### Status
 
