@@ -38,7 +38,7 @@ Der vil laves et grafisk interface, som vi vil bruge til at vise resultatet af f
 
 
 ### Installation guide
-
+pip3 install -r requirements.txt
 
 ### User guide
 
