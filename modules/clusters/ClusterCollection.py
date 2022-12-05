@@ -14,22 +14,22 @@ def __load_data():
     return data
 
 
-def __prepare_data(data):
-    data = data[data['original_language'] == 'en']
-    data = data[['budget', 'genres', 'id', 'imdb_id', 'original_title', "title", 'popularity', 'release_date',
-                'revenue', 'runtime', 'vote_average', 'vote_count']]
-    data = data[(data['genres'] != "[]")]
-    data['genres'] = data['genres'].apply(convert_all)
-    data = data[(data.T != 0).all()]
-    return data
-
-
 def __convert_all(obj):
     L = []
     # return all words
     for i in literal_eval(obj):
         L.append(i['name'])
     return L
+
+
+def __prepare_data(data):
+    data = data[data['original_language'] == 'en']
+    data = data[['budget', 'genres', 'id', 'imdb_id', 'original_title', "title", 'popularity', 'release_date',
+                'revenue', 'runtime', 'vote_average', 'vote_count']]
+    data = data[(data['genres'] != "[]")]
+    data['genres'] = data['genres'].apply(__convert_all)
+    data = data[(data.T != 0).all()]
+    return data
 
 
 def __scale_data(data):
