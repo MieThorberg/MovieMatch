@@ -6,5 +6,5 @@ sklearn
 plotly
 requests
 beautifulsoup4
-PIL
+Pillow
 WordCloud
