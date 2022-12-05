@@ -22,10 +22,10 @@ def create_image_cloud(text, image_path):
 
 
 def show_cloud(cloud):
-    plt.imshow(cloud) # creates an image from a 2-dimensional numpy array
-    plt.axis('off') # don't show axies
+    plt.imshow(cloud)  # creates an image from a 2-dimensional numpy array
+    plt.axis('off')  # don't show axies
     plt.show()
 
 
 def save_cloud(cloud, file_path):
-    cloud.to_file(file_path) # save file local
+    cloud.to_file(file_path)  # save file local

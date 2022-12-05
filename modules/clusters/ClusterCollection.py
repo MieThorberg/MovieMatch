@@ -7,32 +7,43 @@ from plotly.offline import init_notebook_mode, iplot, plot
 init_notebook_mode(connected=True)
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import MinMaxScaler
-import seaborn as sns
-import matplotlib.pyplot as plt
-import matplotlib.style as style
+
 
 def __load_data():
     data = pd.read_csv("data/movies_metadata.csv")
     return data
 
+
 def __prepare_data(data):
-    data = data[data['original_language']=='en']
-    data = data[['budget', 'genres','id', 'imdb_id','original_title',"title", 'popularity', 'release_date', 'revenue', 'runtime', 'vote_average', 'vote_count']]
+    data = data[data['original_language'] == 'en']
+    data = data[['budget', 'genres', 'id', 'imdb_id', 'original_title', "title", 'popularity', 'release_date',
+                'revenue', 'runtime', 'vote_average', 'vote_count']]
     data = data[(data['genres'] != "[]")]
-    data['genres'] = data['genres'].fillna('[]').apply(literal_eval).apply(lambda x: [i['name'] for i in x] if isinstance(x, list) else [])
+    data['genres'] = data['genres'].apply(convert_all)
     data = data[(data.T != 0).all()]
     return data
+
+
+def __convert_all(obj):
+    L = []
+    # return all words
+    for i in literal_eval(obj):
+        L.append(i['name'])
+    return L
+
 
 def __scale_data(data):
     scalar = MinMaxScaler()
     scaled_df = data[['budget', 'popularity', 'revenue', 'runtime', 'vote_average', 'vote_count']]
+    # change value to be readable for clustering
     scaled = scalar.fit_transform(data[['budget', 'popularity', 'revenue', 'runtime', 'vote_average', 'vote_count']])
 
     scaled_df = pd.DataFrame(scaled, index=scaled_df.index, columns=scaled_df.columns)
     return scaled_df
 
+
 def __apply_kmeans(df, clusters):
-    kmeans = KMeans(n_clusters=clusters, random_state=0)
+    kmeans = KMeans(n_clusters=clusters)
     cluster_labels = kmeans.fit(df).labels_
     string_labels = ["c{}".format(i) for i in cluster_labels]
     df['cluster_label'] = cluster_labels
@@ -40,7 +51,8 @@ def __apply_kmeans(df, clusters):
 
     return df
 
-def __param_tune(df):
+
+def __elbow_diagram(df):
     scores = {'clusters': list(), 'score': list()}
     for cluster_num in range(1,31):
         scores['clusters'].append(cluster_num)
@@ -63,16 +75,12 @@ def __param_tune(df):
 
     fig.show()
 
-def __create_clusters(data,small, clusters):
-    # clusters = __param_tune(scaled_df)
 
-
+def __create_clusters(data, small, clusters):
     scaled_df = __apply_kmeans(data, clusters)
-
     small = small.join(scaled_df[['cluster_label', 'cluster_string']])
-    #small = small.join(small[['title', 'genres']])
-
     return small
+
 
 def __create_scatter(data):
     fig = px.scatter_matrix(data, dimensions=['budget', 'popularity', 'revenue', 'runtime', 'vote_average', 'vote_count'],
@@ -85,12 +93,14 @@ def __create_scatter(data):
 
     iplot(fig)
 
+
 def make_elbow_digram():
     data = __load_data()
     data = __prepare_data(data)
     data = __scale_data(data)
 
-    __param_tune(data)
+    __elbow_diagram(data)
+
 
 def make_Cluster_metrix(clusters):
     data = __load_data()
