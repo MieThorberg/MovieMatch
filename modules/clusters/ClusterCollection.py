@@ -52,28 +52,28 @@ def __apply_kmeans(df, clusters):
     return df
 
 
-def __elbow_diagram(df):
-    scores = {'clusters': list(), 'score': list()}
-    for cluster_num in range(1,31):
-        scores['clusters'].append(cluster_num)
-        scores['score'].append(KMeans(n_clusters=cluster_num, random_state=0).fit(df).score(df))
-
-    scores_df = pd.DataFrame(scores)
-
-    fig = go.Figure(go.Scatter(
-        x=scores_df['clusters'],
-        y=scores_df['score']
-    ))
-
-    fig.update_layout(
-        xaxis_title='Cluster',
-        yaxis_title='Score',
-        title='Elbow Method Results',
-        height=800,
-        width=800
-    )
-
-    fig.show()
+# def __elbow_diagram(df):
+#     scores = {'clusters': list(), 'score': list()}
+#     for cluster_num in range(1,31):
+#         scores['clusters'].append(cluster_num)
+#         scores['score'].append(KMeans(n_clusters=cluster_num, random_state=0).fit(df).score(df))
+#
+#     scores_df = pd.DataFrame(scores)
+#
+#     fig = go.Figure(go.Scatter(
+#         x=scores_df['clusters'],
+#         y=scores_df['score']
+#     ))
+#
+#     fig.update_layout(
+#         xaxis_title='Cluster',
+#         yaxis_title='Score',
+#         title='Elbow Method Results',
+#         height=800,
+#         width=800
+#     )
+#
+#     fig.show()
 
 
 def __create_clusters(data, small, clusters):
@@ -94,12 +94,12 @@ def __create_scatter(data):
     iplot(fig)
 
 
-def make_elbow_digram():
-    data = __load_data()
-    data = __prepare_data(data)
-    data = __scale_data(data)
-
-    __elbow_diagram(data)
+# def make_elbow_digram():
+#     data = __load_data()
+#     data = __prepare_data(data)
+#     data = __scale_data(data)
+#
+#     __elbow_diagram(data)
 
 
 def make_Cluster_metrix(clusters):
