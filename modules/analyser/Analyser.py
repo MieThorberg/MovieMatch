@@ -50,7 +50,6 @@ def revenue_predict(df, feat1, feat2, budget):
     coe = reg.coef_[0]
     # constant
     intercept = reg.intercept_
-
     revenue = coe * budget + intercept
     return revenue
 
@@ -68,7 +67,7 @@ def average_revenue_by_month(df):
     month_release = df['release_date'].dt.month
 
     month_release = pd.DataFrame(month_release)
-    month_release.rename(columns={'release_date': 'release_month'}, inplace=True)
+    month_release.rename(columns={'release_date': 'release_month'}, inplace=True)  # doesnt copy frame
     month_release['revenue'] = df['revenue']
     mean_revenue = month_release.groupby('release_month').mean()
     mean_revenue['month'] = months
@@ -117,8 +116,8 @@ def plot_production_company(df):
     print('Shape:', dfmovies_companies.shape)
 
     # agg 'size' counts the movies. reset.index() because movie and production index are different
-    dfmovies_companies = dfmovies_companies.groupby('production_companies').agg(
-        {'movies': 'size'}).reset_index().sort_values('movies', ascending=False)
+    dfmovies_companies = dfmovies_companies.groupby('production_companies').agg({'movies': 'size'})\
+        .reset_index().sort_values('movies', ascending=False)
 
     print(dfmovies_companies.head())
 

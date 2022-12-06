@@ -5,9 +5,9 @@ from tkinter import *
 from tkinter.ttk import Combobox
 from PIL import ImageTk, Image
 from modules.webscrape import Webscraper as ws
-import modules.recommmender.CollaborativeRecommender as cr
+import modules.recommender.CollaborativeRecommender as cr
 import modules.PrepareData as prepare
-import modules.recommmender.ContentRecommender as content
+import modules.recommender.ContentRecommender as content
 
 # Graphical User Interface (GUI)
 # Showing the results of recommendations by searching with Collaborative and Content filtering.
