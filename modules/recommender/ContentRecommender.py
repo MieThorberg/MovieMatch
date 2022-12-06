@@ -105,8 +105,6 @@ def create_matrix_of_tag_words(df):
     # each word from all tags are represented by a column of the matrix
     # each tag from every movie is represented by the row of the matrix
 
-    # one-hot encoding
-    # Associate to a unique integer index to every word
     # the value in the matrix turns into a binary vector of size
     CV = CountVectorizer(max_features=8000,  # the most frequently words
                          stop_words="english"  # only english words
