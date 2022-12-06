@@ -91,17 +91,17 @@ def make_cluster(movie_df):
 
 
 def optimise_k_means(data, max_k):
-    means = [];
+    means = []
     inertias = []
 
     for k in range(1, max_k):
-        kmeans = KMeans(n_clusters = k)
-        kmeans.fit(data[[data.columns[1],data.columns[2]]])
+        kmeans = KMeans(n_clusters=k)
+        kmeans.fit(data[[data.columns[1], data.columns[2]]])
 
         means.append(k)
         inertias.append(kmeans.inertia_)
 
-    fig = plt.subplots(figsize=(10,5))
+    fig = plt.subplots(figsize=(10, 5))
     plt.plot(means, inertias, 'o-')
     plt.xlabel('Number of Clusters')
     plt.ylabel('Inertia')
